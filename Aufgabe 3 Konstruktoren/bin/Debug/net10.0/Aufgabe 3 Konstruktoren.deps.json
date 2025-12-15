@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v10.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v10.0": {
+      "Aufgabe 3 Konstruktoren/1.0.0": {
+        "runtime": {
+          "Aufgabe 3 Konstruktoren.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Aufgabe 3 Konstruktoren/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

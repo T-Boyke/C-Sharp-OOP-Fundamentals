@@ -11,12 +11,12 @@
 using System;
 using System.Reflection;
 
-[assembly: System.Reflection.AssemblyCompanyAttribute("Aufgabe 2 TV")]
+[assembly: System.Reflection.AssemblyCompanyAttribute("Aufgabe 3 Konstruktoren")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f5689a476cef7abadd10d924764ef15c82e09ede")]
-[assembly: System.Reflection.AssemblyProductAttribute("Aufgabe 2 TV")]
-[assembly: System.Reflection.AssemblyTitleAttribute("Aufgabe 2 TV")]
+[assembly: System.Reflection.AssemblyProductAttribute("Aufgabe 3 Konstruktoren")]
+[assembly: System.Reflection.AssemblyTitleAttribute("Aufgabe 3 Konstruktoren")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
 
 // Von der MSBuild WriteCodeFragment-Klasse generiert.

@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "C:\\Users\\Tobia\\Desktop\\cSharpRepo\\Array\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{2FE26F61-D23D-4C31-A2F9-56E798069EA6}|Aufgabe 3 Konstruktoren\\Aufgabe 3 Konstruktoren.csproj|c:\\users\\tobia\\desktop\\csharprepo\\array\\aufgabe 3 konstruktoren\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2FE26F61-D23D-4C31-A2F9-56E798069EA6}|Aufgabe 3 Konstruktoren\\Aufgabe 3 Konstruktoren.csproj|solutionrelative:aufgabe 3 konstruktoren\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{5B4D7A3D-6B1A-4FB4-B548-F3C53A3FA37F}|Aufgabe 2 TV\\Aufgabe 2 TV.csproj|c:\\users\\tobia\\desktop\\csharprepo\\array\\aufgabe 2 tv\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{5B4D7A3D-6B1A-4FB4-B548-F3C53A3FA37F}|Aufgabe 2 TV\\Aufgabe 2 TV.csproj|solutionrelative:aufgabe 2 tv\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -11,12 +15,12 @@
       "RelativeMoniker": "D:0:0:{5B4D7A3D-6B1A-4FB4-B548-F3C53A3FA37F}|Aufgabe 2 TV\\Aufgabe 2 TV.csproj|solutionrelative:aufgabe 2 tv\\klassendiagrammtv.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2BD1D60D-3A5D-D012-068D-B8B5E79F8D0E}|Array\\Array.csproj|c:\\users\\tobia\\desktop\\csharprepo\\array\\array\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2BD1D60D-3A5D-D012-068D-B8B5E79F8D0E}|Array\\Array.csproj|solutionrelative:array\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Tobia\\Desktop\\cSharpRepo\\Array\\Array\\FileName.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Array\\FileName.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2BD1D60D-3A5D-D012-068D-B8B5E79F8D0E}|Array\\Array.csproj|c:\\users\\tobia\\desktop\\csharprepo\\array\\array\\filename.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2BD1D60D-3A5D-D012-068D-B8B5E79F8D0E}|Array\\Array.csproj|solutionrelative:array\\filename.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Tobia\\Desktop\\cSharpRepo\\Array\\Array\\Program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Array\\Program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,24 +30,41 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{d84ee353-0bef-5a41-a649-8f89aca5d84d}"
+            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\Tobia\\Desktop\\cSharpRepo\\Array\\Aufgabe 3 Konstruktoren\\Program.cs",
+              "RelativeDocumentMoniker": "Aufgabe 3 Konstruktoren\\Program.cs",
+              "ToolTip": "C:\\Users\\Tobia\\Desktop\\cSharpRepo\\Array\\Aufgabe 3 Konstruktoren\\Program.cs",
+              "RelativeToolTip": "Aufgabe 3 Konstruktoren\\Program.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAiwDQAAAACAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-15T07:33:32.081Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\Tobia\\Desktop\\cSharpRepo\\Array\\Aufgabe 2 TV\\Program.cs",
               "RelativeDocumentMoniker": "Aufgabe 2 TV\\Program.cs",
               "ToolTip": "C:\\Users\\Tobia\\Desktop\\cSharpRepo\\Array\\Aufgabe 2 TV\\Program.cs",
               "RelativeToolTip": "Aufgabe 2 TV\\Program.cs",
-              "ViewState": "AgIAADYAAAAAAAAAAAAmwA0AAAAaAAAAAAAAAA==",
+              "ViewState": "AgIAAFAAAAAAAAAAAAAAwAwAAAAtAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-12-12T11:51:04.654Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "KlassendiagrammTV.md",
               "DocumentMoniker": "C:\\Users\\Tobia\\Desktop\\cSharpRepo\\Array\\Aufgabe 2 TV\\KlassendiagrammTV.md",
               "RelativeDocumentMoniker": "Aufgabe 2 TV\\KlassendiagrammTV.md",
@@ -64,12 +85,11 @@
               "RelativeToolTip": "Array\\FileName.cs",
               "ViewState": "AgIAAAQAAAAAAAAAAAAcwCAAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-12T08:39:35.62Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-12T08:39:35.62Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\Tobia\\Desktop\\cSharpRepo\\Array\\Array\\Program.cs",
               "RelativeDocumentMoniker": "Array\\Program.cs",
@@ -77,8 +97,7 @@
               "RelativeToolTip": "Array\\Program.cs",
               "ViewState": "AgIAAFEAAAAAAAAAAAAAwGIAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-11T08:29:05.343Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-11T08:29:05.343Z"
             }
           ]
         }
