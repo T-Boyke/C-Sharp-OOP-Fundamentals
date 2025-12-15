@@ -1,0 +1,14 @@
+C:\Users\Tobia\Desktop\cSharpRepo\Array\Aufgabe 2 TV\obj\Debug\net10.0\Aufgabe 2 TV.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Tobia\Desktop\cSharpRepo\Array\Aufgabe 2 TV\obj\Debug\net10.0\Aufgabe 2 TV.AssemblyInfoInputs.cache
+C:\Users\Tobia\Desktop\cSharpRepo\Array\Aufgabe 2 TV\obj\Debug\net10.0\Aufgabe 2 TV.AssemblyInfo.cs
+C:\Users\Tobia\Desktop\cSharpRepo\Array\Aufgabe 2 TV\obj\Debug\net10.0\Aufgabe 2 TV.csproj.CoreCompileInputs.cache
+C:\Users\Tobia\Desktop\cSharpRepo\Array\Aufgabe 2 TV\bin\Debug\net10.0\Aufgabe 2 TV.exe
+C:\Users\Tobia\Desktop\cSharpRepo\Array\Aufgabe 2 TV\bin\Debug\net10.0\Aufgabe 2 TV.deps.json
+C:\Users\Tobia\Desktop\cSharpRepo\Array\Aufgabe 2 TV\bin\Debug\net10.0\Aufgabe 2 TV.runtimeconfig.json
+C:\Users\Tobia\Desktop\cSharpRepo\Array\Aufgabe 2 TV\bin\Debug\net10.0\Aufgabe 2 TV.dll
+C:\Users\Tobia\Desktop\cSharpRepo\Array\Aufgabe 2 TV\bin\Debug\net10.0\Aufgabe 2 TV.pdb
+C:\Users\Tobia\Desktop\cSharpRepo\Array\Aufgabe 2 TV\obj\Debug\net10.0\Aufgabe 2 TV.dll
+C:\Users\Tobia\Desktop\cSharpRepo\Array\Aufgabe 2 TV\obj\Debug\net10.0\refint\Aufgabe 2 TV.dll
+C:\Users\Tobia\Desktop\cSharpRepo\Array\Aufgabe 2 TV\obj\Debug\net10.0\Aufgabe 2 TV.pdb
+C:\Users\Tobia\Desktop\cSharpRepo\Array\Aufgabe 2 TV\obj\Debug\net10.0\Aufgabe 2 TV.genruntimeconfig.cache
+C:\Users\Tobia\Desktop\cSharpRepo\Array\Aufgabe 2 TV\obj\Debug\net10.0\ref\Aufgabe 2 TV.dll

@@ -1,0 +1,14 @@
+C:\Users\Tobia\Desktop\cSharpRepo\Array\Array\bin\Debug\net10.0\Aufgabe 1 Array.exe
+C:\Users\Tobia\Desktop\cSharpRepo\Array\Array\bin\Debug\net10.0\Aufgabe 1 Array.deps.json
+C:\Users\Tobia\Desktop\cSharpRepo\Array\Array\bin\Debug\net10.0\Aufgabe 1 Array.runtimeconfig.json
+C:\Users\Tobia\Desktop\cSharpRepo\Array\Array\bin\Debug\net10.0\Aufgabe 1 Array.dll
+C:\Users\Tobia\Desktop\cSharpRepo\Array\Array\bin\Debug\net10.0\Aufgabe 1 Array.pdb
+C:\Users\Tobia\Desktop\cSharpRepo\Array\Array\obj\Debug\net10.0\Aufgabe 1 Array.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Tobia\Desktop\cSharpRepo\Array\Array\obj\Debug\net10.0\Aufgabe 1 Array.AssemblyInfoInputs.cache
+C:\Users\Tobia\Desktop\cSharpRepo\Array\Array\obj\Debug\net10.0\Aufgabe 1 Array.AssemblyInfo.cs
+C:\Users\Tobia\Desktop\cSharpRepo\Array\Array\obj\Debug\net10.0\Aufgabe 1 Array.csproj.CoreCompileInputs.cache
+C:\Users\Tobia\Desktop\cSharpRepo\Array\Array\obj\Debug\net10.0\Aufgabe 1 Array.dll
+C:\Users\Tobia\Desktop\cSharpRepo\Array\Array\obj\Debug\net10.0\refint\Aufgabe 1 Array.dll
+C:\Users\Tobia\Desktop\cSharpRepo\Array\Array\obj\Debug\net10.0\Aufgabe 1 Array.pdb
+C:\Users\Tobia\Desktop\cSharpRepo\Array\Array\obj\Debug\net10.0\Aufgabe 1 Array.genruntimeconfig.cache
+C:\Users\Tobia\Desktop\cSharpRepo\Array\Array\obj\Debug\net10.0\ref\Aufgabe 1 Array.dll
