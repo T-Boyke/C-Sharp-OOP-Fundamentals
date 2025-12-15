@@ -2,4 +2,5 @@
   <Project Path="Array/Aufgabe 1 Array.csproj" />
   <Project Path="Aufgabe 2 TV/Aufgabe 2 TV.csproj" Id="5b4d7a3d-6b1a-4fb4-b548-f3c53a3fa37f" />
   <Project Path="Aufgabe 3 Konstruktoren/Aufgabe 3 Konstruktoren.csproj" Id="2fe26f61-d23d-4c31-a2f9-56e798069ea6" />
+  <Project Path="Aufgabe 4 Static Member/Aufgabe 4 Static Member.csproj" Id="0f302b0c-1c5a-490a-bdec-a147270e7429" />
 </Solution>

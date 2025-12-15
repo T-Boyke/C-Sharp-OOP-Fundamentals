@@ -30,12 +30,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 0,
           "Children": [
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{d84ee353-0bef-5a41-a649-8f89aca5d84d}"
-            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
@@ -44,7 +40,7 @@
               "RelativeDocumentMoniker": "Aufgabe 3 Konstruktoren\\Program.cs",
               "ToolTip": "C:\\Users\\Tobia\\Desktop\\cSharpRepo\\Array\\Aufgabe 3 Konstruktoren\\Program.cs",
               "RelativeToolTip": "Aufgabe 3 Konstruktoren\\Program.cs",
-              "ViewState": "AgIAAAsAAAAAAAAAAAAiwDQAAAACAAAAAAAAAA==",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAQwBEAAAAKAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-12-15T07:33:32.081Z",
               "EditorCaption": ""
@@ -59,8 +55,7 @@
               "RelativeToolTip": "Aufgabe 2 TV\\Program.cs",
               "ViewState": "AgIAAFAAAAAAAAAAAAAAwAwAAAAtAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-12T11:51:04.654Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-12T11:51:04.654Z"
             },
             {
               "$type": "Document",
@@ -72,8 +67,7 @@
               "RelativeToolTip": "Aufgabe 2 TV\\KlassendiagrammTV.md",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAADAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001818|",
-              "WhenOpened": "2025-12-12T11:02:16.23Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-12T11:02:16.23Z"
             },
             {
               "$type": "Document",
@@ -98,6 +92,10 @@
               "ViewState": "AgIAAFEAAAAAAAAAAAAAwGIAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-12-11T08:29:05.343Z"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{d84ee353-0bef-5a41-a649-8f89aca5d84d}"
             }
           ]
         }

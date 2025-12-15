@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Aufgabe 3 Konstruktoren")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2f0d3d9b577376ff115c244302fc2725bc61ef66")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+73ff6bfa646ec2c37580314c4afc7c074dae39ae")]
 [assembly: System.Reflection.AssemblyProductAttribute("Aufgabe 3 Konstruktoren")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Aufgabe 3 Konstruktoren")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
