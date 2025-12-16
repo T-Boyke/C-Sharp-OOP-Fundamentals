@@ -3,6 +3,14 @@
   "WorkspaceRootPath": "C:\\Users\\Tobia\\Desktop\\cSharpRepo\\Array\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{0F302B0C-1C5A-490A-BDEC-A147270E7429}|Aufgabe 4 Static Member\\Aufgabe 4 Static Member.csproj|c:\\users\\tobia\\desktop\\csharprepo\\array\\aufgabe 4 static member\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0F302B0C-1C5A-490A-BDEC-A147270E7429}|Aufgabe 4 Static Member\\Aufgabe 4 Static Member.csproj|solutionrelative:aufgabe 4 static member\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Tobia\\Desktop\\cSharpRepo\\Array\\.gitignore||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:.gitignore||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{2FE26F61-D23D-4C31-A2F9-56E798069EA6}|Aufgabe 3 Konstruktoren\\Aufgabe 3 Konstruktoren.csproj|c:\\users\\tobia\\desktop\\csharprepo\\array\\aufgabe 3 konstruktoren\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{2FE26F61-D23D-4C31-A2F9-56E798069EA6}|Aufgabe 3 Konstruktoren\\Aufgabe 3 Konstruktoren.csproj|solutionrelative:aufgabe 3 konstruktoren\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -36,18 +44,42 @@
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\Tobia\\Desktop\\cSharpRepo\\Array\\Aufgabe 3 Konstruktoren\\Program.cs",
-              "RelativeDocumentMoniker": "Aufgabe 3 Konstruktoren\\Program.cs",
-              "ToolTip": "C:\\Users\\Tobia\\Desktop\\cSharpRepo\\Array\\Aufgabe 3 Konstruktoren\\Program.cs",
-              "RelativeToolTip": "Aufgabe 3 Konstruktoren\\Program.cs",
-              "ViewState": "AgIAAA4AAAAAAAAAAAAQwBEAAAAKAAAAAAAAAA==",
+              "DocumentMoniker": "C:\\Users\\Tobia\\Desktop\\cSharpRepo\\Array\\Aufgabe 4 Static Member\\Program.cs",
+              "RelativeDocumentMoniker": "Aufgabe 4 Static Member\\Program.cs",
+              "ToolTip": "C:\\Users\\Tobia\\Desktop\\cSharpRepo\\Array\\Aufgabe 4 Static Member\\Program.cs",
+              "RelativeToolTip": "Aufgabe 4 Static Member\\Program.cs",
+              "ViewState": "AgIAAKsAAAAAAAAAAAAAwB8AAAAHAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-15T07:33:32.081Z",
+              "WhenOpened": "2025-12-15T14:32:34.504Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
+              "Title": ".gitignore",
+              "DocumentMoniker": "C:\\Users\\Tobia\\Desktop\\cSharpRepo\\Array\\.gitignore",
+              "RelativeDocumentMoniker": ".gitignore",
+              "ToolTip": "C:\\Users\\Tobia\\Desktop\\cSharpRepo\\Array\\.gitignore",
+              "RelativeToolTip": ".gitignore",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABwAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-12-15T09:32:46.607Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\Tobia\\Desktop\\cSharpRepo\\Array\\Aufgabe 3 Konstruktoren\\Program.cs",
+              "RelativeDocumentMoniker": "Aufgabe 3 Konstruktoren\\Program.cs",
+              "ToolTip": "C:\\Users\\Tobia\\Desktop\\cSharpRepo\\Array\\Aufgabe 3 Konstruktoren\\Program.cs",
+              "RelativeToolTip": "Aufgabe 3 Konstruktoren\\Program.cs",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAxwBEAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-15T07:33:32.081Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\Tobia\\Desktop\\cSharpRepo\\Array\\Aufgabe 2 TV\\Program.cs",
               "RelativeDocumentMoniker": "Aufgabe 2 TV\\Program.cs",
@@ -59,7 +91,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
               "Title": "KlassendiagrammTV.md",
               "DocumentMoniker": "C:\\Users\\Tobia\\Desktop\\cSharpRepo\\Array\\Aufgabe 2 TV\\KlassendiagrammTV.md",
               "RelativeDocumentMoniker": "Aufgabe 2 TV\\KlassendiagrammTV.md",
@@ -71,7 +103,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 5,
               "Title": "FileName.cs",
               "DocumentMoniker": "C:\\Users\\Tobia\\Desktop\\cSharpRepo\\Array\\Array\\FileName.cs",
               "RelativeDocumentMoniker": "Array\\FileName.cs",
@@ -83,7 +115,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 6,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\Tobia\\Desktop\\cSharpRepo\\Array\\Array\\Program.cs",
               "RelativeDocumentMoniker": "Array\\Program.cs",
