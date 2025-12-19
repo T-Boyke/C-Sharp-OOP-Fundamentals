@@ -2,6 +2,41 @@ using System;
 
 namespace StudentenDatenbank
 {
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            // 1. Datenbank für 3 Studenten anlegen
+            Datenbank db = new Datenbank(3);
+
+            // 2. Studenten erstellen
+            Student s1 = new Student(1, "Peter", "Informatik");
+            Student s2 = new Student(2, "Anna", "BWL");
+            Student s3 = new Student(3, "Max", "Physik");
+            Student s4 = new Student(4, "Lisa", "Chemie"); // Passt nicht mehr rein
+
+            // 3. Hinzufügen testen
+            Console.WriteLine($"Füge Peter hinzu: {db.AddStudent(s1)}");
+            Console.WriteLine($"Füge Anna hinzu: {db.AddStudent(s2)}");
+            Console.WriteLine($"Füge Max hinzu: {db.AddStudent(s3)}");
+            Console.WriteLine($"Füge Lisa hinzu (sollte false sein): {db.AddStudent(s4)}");
+
+            Console.WriteLine();
+
+            // 4. Alles ausgeben
+            db.PrintMe();
+
+            // 5. Entfernen testen
+            Console.WriteLine($"Entferne Anna: {db.RemoveStudent(s2)}");
+
+            Console.WriteLine();
+
+            // 6. Erneute Ausgabe (Lücke im Array sollte ignoriert werden)
+            db.PrintMe();
+
+            Console.ReadKey();
+        }
+    }
     // a) Klasse Student
     public class Student
     {
@@ -65,7 +100,7 @@ namespace StudentenDatenbank
                 // 2. Prüfen und Löschen
                 if (index != -1)
                 {
-                    _studenten[i] = null; // Platz wieder freigeben
+                    _studenten[index] = null; // Platz wieder freigeben
                     return true; // Erfolgreich entfernt
                 }
             return false; // Student nicht gefunden
