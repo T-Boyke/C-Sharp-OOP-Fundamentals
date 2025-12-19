@@ -59,16 +59,15 @@ namespace StudentenDatenbank
         // e) RemoveStudent: Entfernt einen spezifischen Studenten
         public bool RemoveStudent(Student student)
         {
-            for (int i = 0; i < _studenten.Length; i++)
-            {
-                // Wir müssen prüfen, ob der Slot nicht null ist UND ob es der gesuchte Student ist.
-                // Best Practice: Vergleich über die eindeutige Matrikelnummer ist sicherer als reiner Objektvergleich.
-                if (_studenten[i] != null && _studenten[i].MatrikelNr == student.MatrikelNr)
+            // 1. Suche den Index effizient mit einem Prädikat (Lambda-Ausdruck)
+            // Array.FindIndex gibt -1 zurück, wenn nichts gefunden wurde.
+            int index = Array.FindIndex(_studenten, s => s != null && s.MatrikelNr == student.MatrikelNr);
+                // 2. Prüfen und Löschen
+                if (index != -1)
                 {
                     _studenten[i] = null; // Platz wieder freigeben
                     return true; // Erfolgreich entfernt
                 }
-            }
             return false; // Student nicht gefunden
         }
 
