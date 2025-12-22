@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Aufgabe_3_Konstruktoren
+namespace Aufgabe_03_Konstruktoren
 {
     // Definition der Enums für Farbe und Größe
     public enum EColor
@@ -128,11 +128,15 @@ namespace Aufgabe_3_Konstruktoren
         }
     }
 
-    class Programm
+    /// <summary>
+    /// Steuerungsklasse für Aufgabe 03 (Konstruktoren).
+    /// </summary>
+    public class App
     {
-        static void Main(string[] args)
+        public static void Run()
         {
-            Console.WriteLine("--- Test 1: Voller Konstruktor mit Enums ---");
+            Console.Clear();
+            Console.WriteLine("=== Aufgabe 03: Konstruktoren (Sweatshirt) ===");
             // Erzeugen Sie anschließend in der Main()-Methode mindestens ein Sweatshirt-Objekt 
             // und testen Sie alle Funktionalitäten.
 
@@ -153,6 +157,7 @@ namespace Aufgabe_3_Konstruktoren
             Sweatshirt rotesShirt = new Sweatshirt(EColor.Red);
             rotesShirt.PrintInfos();
 
+            Console.WriteLine("\nDrücke eine Taste...");
             Console.ReadKey();
         }
     }

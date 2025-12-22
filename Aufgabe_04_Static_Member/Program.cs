@@ -1,6 +1,6 @@
 using System;
 
-namespace Aufgabe_4_Static_Member
+namespace Aufgabe_04_Static_Member
 {
     /// <summary>
     /// Repräsentiert ein einzelnes Warenhaus.
@@ -133,10 +133,15 @@ namespace Aufgabe_4_Static_Member
         }
     }
 
-    class Program
+    /// <summary>
+    /// Steuerungsklasse für Aufgabe 04 (Static Member).
+    /// </summary>
+    public class App
     {
-        static void Main(string[] args)
+        public static void Run()
         {
+            Console.Clear();
+            Console.WriteLine("=== Aufgabe 04: Static Member (Warenhaus) ===");
             Random rnd = new Random();
 
             // Erstellen der Objekte (Instanzen).
@@ -182,6 +187,7 @@ namespace Aufgabe_4_Static_Member
             // Abschließende globale Auswertung
             Warenhaus.GlobaleStatistikAusgeben();
 
+            Console.WriteLine("\nDrücke eine Taste...");
             Console.ReadKey();
         }
     }

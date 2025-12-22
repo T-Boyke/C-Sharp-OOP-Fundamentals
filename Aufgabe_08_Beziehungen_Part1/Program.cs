@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 
+namespace Aufgabe_08_Beziehungen_Part1
+{
 class Auto
 {
     public string Kennzeichen { get; }
@@ -43,12 +45,18 @@ class Parkplatz
     }
 }
 
-class Program
-{
-    static void Main()
+    /// <summary>
+    /// Steuerungsklasse für Aufgabe 08 (Parkplatz).
+    /// </summary>
+    public class App
     {
-        // Parkplatz mit 5 Boxen erstellen
-        Parkplatz meinParkplatz = new Parkplatz(5);
+        public static void Run()
+        {
+            Console.Clear();
+            Console.WriteLine("=== Aufgabe 08: Parkplatz (Beziehungen I) ===");
+
+            // Parkplatz mit 5 Boxen erstellen
+            Parkplatz meinParkplatz = new Parkplatz(5);
 
         // Autos erstellen
         Auto auto1 = new Auto("NE-AB 123");
@@ -68,5 +76,9 @@ class Program
         // Ausparken
         meinParkplatz.Boxen[0].Ausparken();
         Console.WriteLine($"Box 0 ist wieder frei: {meinParkplatz.Boxen[0].IstFrei()}");
+
+        Console.WriteLine("\nDrücke eine Taste...");
+        Console.ReadKey();
     }
+}
 }

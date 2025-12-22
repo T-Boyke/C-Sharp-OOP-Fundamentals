@@ -1,6 +1,11 @@
 using System;
 
-internal class MyDate
+namespace Aufgabe_06_Gesamt
+{
+    /// <summary>
+    /// Datumsklasse für Aufgabe 06.
+    /// </summary>
+    internal class MyDate
 {
     // Statisches Array für die Tage pro Monat (Index 0 = Januar - 1, hier direkt Werte 1-12 simulieren oder Index anpassen)
     // Aufgabenstellung nutzt Array direkt, Vorsicht: Array ist 0-indiziert, Monate sind 1-indiziert.
@@ -151,5 +156,29 @@ internal class MyDate
         }
 
         return new MyDate(prevDay, prevMonth, prevYear);
+        return new MyDate(prevDay, prevMonth, prevYear);
+    }
+}
+    /// <summary>
+    /// Steuerungsklasse für Aufgabe 06.
+    /// </summary>
+    public class App
+    {
+        public static void Run()
+        {
+            Console.Clear();
+            Console.WriteLine("=== Aufgabe 06: MyDate Tests ===");
+            
+            MyDate date = new MyDate(28, 2, 2024);
+            Console.WriteLine($"Startdatum: {date}");
+            Console.WriteLine($"Morgen (Schaltjahr): {date.Tomorrow()}");
+            
+            MyDate date2 = new MyDate(1, 1, 2025);
+            Console.WriteLine($"Neujahr 2025: {date2}");
+            Console.WriteLine($"Gestern (Silvester): {date2.Yesterday()}");
+
+            Console.WriteLine("\nDrücke eine Taste...");
+            Console.ReadKey();
+        }
     }
 }

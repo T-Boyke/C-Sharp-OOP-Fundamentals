@@ -1,9 +1,18 @@
-﻿namespace Aufgabe_2_TV
+﻿namespace Aufgabe_02_TV
 {
-    class Fernbedienung
+    /// <summary>
+    /// Steuerungsklasse für das TV-Programm (Fernbedienung).
+    /// </summary>
+    public class App
     {
-        static void Main(string[] args)
+        /// <summary>
+        /// Startet die TV-Simulation.
+        /// </summary>
+        public static void Run()
         {
+            Console.Clear();
+            Console.WriteLine("=== Aufgabe 02: TV Simulation ===");
+
             // Objekt erzeugen
             TV Sony = new TV();
 
@@ -19,6 +28,7 @@
 
             Sony.TurnOff();      // Ausschalten
 
+            Console.WriteLine("\nDrücke eine Taste...");
             Console.ReadKey();
         }
     }
@@ -38,22 +48,34 @@
             channel = 1; // Default channel
         }
 
-        // Fernbedienung Methoden
+        /// <summary>
+        /// Schaltet den Fernseher an.
+        /// </summary>
         public void TurnOn()
         {
             switchOn = true;
             Console.WriteLine("Glotze ist an!");
         }
+        /// <summary>
+        /// Schaltet den Fernseher aus.
+        /// </summary>
         public void TurnOff()
         {
             switchOn = false;
             Console.WriteLine("Glotze ist aus!");
         }
+        /// <summary>
+        /// Prüft, ob der Fernseher an ist.
+        /// </summary>
+        /// <returns>True wenn an, sonst False.</returns>
         public bool IsOn()
         {
             return switchOn;
         }
-        // Aufgabe C Erweitern sie die Klasse in c# so dass die Lautstärke nur zwischen 0 und 100 liegen kann.
+        /// <summary>
+        /// Erhöht die Lautstärke um 1 (bis max 100).
+        /// Nur möglich, wenn TV an ist.
+        /// </summary>
         public void RaiseVolume()
         {
             if (switchOn)
@@ -73,7 +95,11 @@
                 Console.WriteLine("TV ist aus. Lautstärke kann nicht geändert werden.");
             }
         }
-        // Zu Aufgabe d) Änderung in anderen Schrittweiten - Lösung: Überberladung
+        /// <summary>
+        /// Erhöht die Lautstärke um einen bestimmten Wert.
+        /// Überladung der Methode RaiseVolume.
+        /// </summary>
+        /// <param name="step">Schrittweite der Erhöhung.</param>
         public void RaiseVolume(int step)
         {
             if (switchOn)
@@ -91,6 +117,9 @@
             }
         }
 
+        /// <summary>
+        /// Verringert die Lautstärke um 1 (bis min 0).
+        /// </summary>
         public void LowerVolume()
         {
             if (switchOn)
@@ -106,8 +135,10 @@
                 }
             }
         }
-        // Zu Aufgabe e) Programm einstellen
-        // Lösung: Neues Attribut 'channel' und eine Methode zum Setzen
+        /// <summary>
+        /// Wechselt das Programm (Sender).
+        /// </summary>
+        /// <param name="newChannel">Neuer Programmplatz (1-999).</param>
         public void SetChannel(int newChannel)
         {
             if (switchOn)
