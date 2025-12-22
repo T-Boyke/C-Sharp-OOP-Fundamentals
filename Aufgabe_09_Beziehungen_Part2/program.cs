@@ -74,12 +74,13 @@ namespace Aufgabe_09_Beziehungen_Part2
     public class Datenbank
     {
         // Das interne Array (der "Setzkasten")
-        private Student[] _studenten;
+        // Nullable, da Plätze auch leer sein können
+        private Student?[] _studenten;
 
         // Konstruktor: Legt die Größe des Arrays fest
         public Datenbank(int kapazitaet)
         {
-            _studenten = new Student[kapazitaet];
+            _studenten = new Student?[kapazitaet];
         }
 
         // d) AddStudent: Fügt Student an den ersten freien Platz hinzu
