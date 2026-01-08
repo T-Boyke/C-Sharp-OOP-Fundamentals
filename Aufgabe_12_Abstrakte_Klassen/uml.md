@@ -1,4 +1,4 @@
-´´´mermaid
+```mermaid
 classDiagram
     class AudioFile {
         <<abstract>>
@@ -23,4 +23,4 @@ classDiagram
     AudioFile <|-- WAVFile
     AudioFile <|-- FLACFile
     AudioPlayer o-- AudioFile
-´´´
+```
