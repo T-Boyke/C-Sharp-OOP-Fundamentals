@@ -1,8 +1,4 @@
 ```mermaid
----
-config:
-  look: neo
----
 sequenceDiagram
     %%participant A as Arzt
     create actor A as Arzt
