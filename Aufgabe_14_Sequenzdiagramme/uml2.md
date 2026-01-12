@@ -1,11 +1,15 @@
 ```mermaid
+---
+config:
+  look: neo
+---
 sequenceDiagram
-    participant A as Arzt
+    %%participant A as Arzt
+    create actor A as Arzt
     participant B as UI
     participant C as Verordnungen
     participant D as Medikation
     participant E as MediDB
-
     A->>B: ausgabeMedikationsplan()
     activate B
     B->>C: getMedikamente(patient)
@@ -18,7 +22,6 @@ sequenceDiagram
         activate D
         D--)B: einnahmeString
         deactivate D
-    
         opt einnahmeString ist leer
             B->>E: getStandardMedikation(medikament)
             activate E
@@ -28,9 +31,8 @@ sequenceDiagram
             B->>B: ausgabeMedikation(einnahmeString)
             activate B
             B-->>B:
-            deactivate B            
+            deactivate B
     end
-    B-->>A:
+    B--)A:
     deactivate B
-
 ```
