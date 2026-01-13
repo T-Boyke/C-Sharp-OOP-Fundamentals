@@ -5,7 +5,27 @@
 | Eine Immobilie besteht aus mehreren Wohnungen. | **Komposition** | Linie mit einer **gefüllten Raute (♦)** auf der Seite der `Immobilie`. | Es liegt eine **Existenzabhängigkeit** vor. Die Teile (Wohnungen) können physisch nicht ohne das Ganze (Immobilie) existieren. Wird das Gebäude zerstört, sind die Wohnungen ebenfalls weg. |
 | Bewohner können entweder Mieter oder Eigentümer sein. | **Generalisierung** (Vererbung) | Pfeile mit einer **hohlen Dreiecksspitze (△)** zeigen von `Mieter` und `Eigentümer` auf `Bewohner`. | Es handelt sich um eine **"Ist-ein"-Beziehung** (Spezialisierung). Mieter und Eigentümer sind spezifische Untergruppen der allgemeinen Klasse Bewohner. |
 | In einer Mietervereinigung gibt es mehrere Mieter. | **Aggregation** | Linie mit einer **hohlen Raute (◇)** auf der Seite der `Mietervereinigung`. | Es ist eine **lose "Ganzes-Teile"-Beziehung**. Die Teile (Mieter) können eigenständig existieren. Wenn der Verein (das Ganze) aufgelöst wird, existieren die Mieter als Personen weiter. |
+```mermaid
+classDiagram
+    %% 1. Komposition: Immobilie und Wohnung
+    %% Die gefüllte Raute (Komposition) wird durch *-- dargestellt
+    class Immobilie
+    class Wohnung
+    Immobilie *-- Wohnung : besteht aus
 
+    %% 2. Generalisierung: Bewohner, Mieter und Eigentümer
+    %% Der Pfeil (Vererbung) wird durch <|-- dargestellt
+    class Bewohner
+    class Mieter
+    class Eigentümer
+    Bewohner <|-- Mieter
+    Bewohner <|-- Eigentümer
+
+    %% 3. Aggregation: Mietervereinigung und Mieter
+    %% Die hohle Raute (Aggregation) wird durch o-- dargestellt
+    class Mietervereinigung
+    Mietervereinigung o-- Mieter : hat Mitglieder
+```
 ### Zum besseren Verständnis (Alltags-Analogien)
 
 Um die Unterschiede der Beziehungen klarer zu machen:
