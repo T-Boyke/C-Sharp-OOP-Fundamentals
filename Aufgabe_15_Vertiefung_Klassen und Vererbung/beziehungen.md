@@ -7,24 +7,24 @@
 | In einer Mietervereinigung gibt es mehrere Mieter. | **Aggregation** | Linie mit einer **hohlen Raute (◇)** auf der Seite der `Mietervereinigung`. | Es ist eine **lose "Ganzes-Teile"-Beziehung**. Die Teile (Mieter) können eigenständig existieren. Wenn der Verein (das Ganze) aufgelöst wird, existieren die Mieter als Personen weiter. |
 ```mermaid
 classDiagram
-    %% 1. Komposition: Immobilie und Wohnung
-    %% Die gefüllte Raute (Komposition) wird durch *-- dargestellt
+    %% 1. Komposition
+    %% "Eine" Immobilie (1) besteht aus "mehreren" Wohnungen (1..*)
     class Immobilie
     class Wohnung
-    Immobilie *-- Wohnung : besteht aus
+    Immobilie "1" *-- "1..*" Wohnung : besteht aus
 
-    %% 2. Generalisierung: Bewohner, Mieter und Eigentümer
-    %% Der Pfeil (Vererbung) wird durch <|-- dargestellt
+    %% 2. Generalisierung
+    %% (Bei Vererbung werden keine Kardinalitäten notiert)
     class Bewohner
     class Mieter
     class Eigentümer
     Bewohner <|-- Mieter
     Bewohner <|-- Eigentümer
 
-    %% 3. Aggregation: Mietervereinigung und Mieter
-    %% Die hohle Raute (Aggregation) wird durch o-- dargestellt
+    %% 3. Aggregation
+    %% "In einer" Vereinigung (1) gibt es "mehrere" Mieter (*)
     class Mietervereinigung
-    Mietervereinigung o-- Mieter : hat Mitglieder
+    Mietervereinigung "1" o-- "*" Mieter : hat Mitglieder
 ```
 ### Zum besseren Verständnis (Alltags-Analogien)
 
