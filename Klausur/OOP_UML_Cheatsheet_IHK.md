@@ -328,4 +328,28 @@ classDiagram
 *   [ ] **Lesbarkeit:** Nutze Lineal (oder saubere Skizzen). Sauberkeit gibt Punkte!
 
 ---
+## 6. 🧠 Eselsbrücken & Reime (Merk-Hilfen)
+
+Damit es im Kopf bleibt – kurz, reimend und schmerzlos.
+
+### UML Symbole & Sichtbarkeiten
+> *"Ein **Plus (+)** ist wie ein off'nes Tor, da darf jeder rein und vor.*
+> *Ein **Minus (-)** schließt die Türe zu, nur ICH hab hier die Ruh.*
+> *Die **Raute (#)** ist für Erben da, in der Familie sagt man 'Ja'."*
+
+### Beziehungen (Rauten & Pfeile)
+> *"Pfeil mit **Dreieck** (zu) oben dran? Das ist **Vererbung**, Mann! (Ist-ein)*
+> *Die **schwarze Raute** ist gemein: Geht das Auto kaputt, geht der Motor mit ein. (Komposition - Todgeweiht)*
+> *Die **weiße Raute** ist leger: Der Reifen rollt auch ohne Auto her. (Aggregation - Überlebt)"*
+
+### Polymorphie
+> *"Ob Hund, ob Katz, ob Maus – 'Mach Laut' ruft man heraus.*
+> *Wuff, Miau und Piep es schallt, **Polymorphie** im Code-Wald.*
+> *(Gleicher Befehl, anderes Ergebnis!)"*
+
+### Interface
+> *"Das **Interface** ist nur Fassade, kein Code drin, das ist schade.*
+> *Es sagt nur 'WAS', niemals 'WIE', vergessen tust du's nie."*
+
+---
 *Viel Erfolg bei der Klausur! Du packst das.* 🚀
