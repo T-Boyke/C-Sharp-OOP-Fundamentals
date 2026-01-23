@@ -1,67 +1,51 @@
 /*
  * ==============================================================================================
- * AUFGABENSTELLUNG: Wasserstand 1
- * * 1. Modellieren Sie einen 'Fluss' mit Namen und Wasserstand (100 - 10.000).
- * 2. Der Fluss soll Methoden zur zufälligen Änderung des Wasserstands haben.
- * 3. Implementieren Sie zwei Events:
- * - Warnung bei Niedrigwasser (< 250)
- * - Warnung bei Hochwasser (> 8.000)
- * 4. Modellieren Sie 'Schiff' als Beobachter.
- * 5. Das Schiff muss auf die Events reagieren (Fahrt stoppen).
- * 6. Testlauf mit Rhein (Rheingold, Lorelei) und Donau (Xaver, Franz).
+ * AUFGABENSTELLUNG: Wasserstand 3 (Data Logging & Export)
+ * 1. Erweitere das Modell, um Zeitstempel (DateTime) statt nur Stunden-Integers zu nutzen.
+ * 2. Speichere die Historie der Wasserstände.
+ * 3. Generiere einen strukturierten Output (CSV-Format: Zeit;Pegel), der für Graphen nutzbar ist.
+ * 4. (Optional) Zeige eine primitive ASCII-Grafik in der Konsole an.
  * ==============================================================================================
  */
 
 using System;
+using System.Collections.Generic;
+using System.Text;
 
 namespace WasserstandEvents;
 
 // ==========================================================================================
-// AUFGABE: Definition der Event-Daten (EventArgs)
-// ERWARTETES ERGEBNIS: Eine Klasse, die den aktuellen Wasserstand transportiert.
+// AUFGABE: Datenstruktur für Messwerte definieren
+// ERWARTETES ERGEBNIS: Ein unveränderlicher Datensatz (Record) für Zeit und Wert.
 // ==========================================================================================
 
-// CHARAKTER-STORY:
-// Osvaldo der Weiße: "Um Daten sauber zu übermitteln, benötigen wir eine strukturierte Klasse."
-// Benjamin der Graue: "Ein einfacher Bote würde reichen, aber Osvaldo besteht auf Protokolle."
-// Kubi der Osmanische Teddybär: "Ist mir egal, solange auf dem Zettel steht, wo die Sucuk ist."
-
 /// <summary>
-/// Beinhaltet die Daten für Wasserstands-Events.
+/// Repräsentiert einen einzelnen Messpunkt im Graphen.
 /// </summary>
-public class WaterLevelEventArgs : EventArgs
-{
-    /// <summary>
-    /// Der aktuelle Wasserstand zum Zeitpunkt des Events.
-    /// </summary>
-    public int CurrentLevel { get; }
-
-    /// <summary>
-    /// Konstruktor für die Event-Daten.
-    /// </summary>
-    /// <param name="level">Der gemessene Wasserstand.</param>
-    public WaterLevelEventArgs(int level)
-    {
-        CurrentLevel = level;
-    }
-}
+/// <param name="Timestamp">Der Zeitpunkt der Messung.</param>
+/// <param name="Level">Der gemessene Wasserstand in cm.</param>
+public record WaterDataPoint(DateTime Timestamp, int Level);
 
 // ==========================================================================================
-// AUFGABE: Klasse Fluss (Publisher) implementieren
-// ERWARTETES ERGEBNIS: Eine Klasse, die den Wasserstand ändert und bei Grenzwerten Events feuert.
+// AUFGABE: River-Klasse mit Historie
+// ERWARTETES ERGEBNIS: Der Fluss speichert nun seine eigenen Vergangenheitswerte.
 // ==========================================================================================
 
 /// <summary>
-/// Repräsentiert einen Fluss, der seinen Wasserstand überwacht und Warnungen sendet.
+/// Ein Fluss, der seine Wasserstände über die Zeit aufzeichnet.
 /// </summary>
 public class River
 {
     // CHARAKTER-STORY:
-    // Andrey der entspannte Russe: "Ein Fluss ist wie das Leben. Mal ruhig, mal wild. Man muss fließen."
-    // Tobi das laute Runde: "UND MANCHMAL IST ER LAUT! WIE HOCHWASSER!"
-    
-    private int _waterLevel;
-    private readonly Random _random = new Random();
+    // Osvaldo der Weiße: "Daten sind das neue Gold. Wir müssen alles archivieren!"
+    // Adil der Planlose Chiller: "Brauchen wir echt alles? Mein Speicher ist voll mit Memes."
+    // Benjamin der Graue: "Die Geschichte darf nicht vergessen werden, Adil."
+
+    private readonly List<WaterDataPoint> _history = new();
+    private readonly Random _random = new();
+    private readonly int _meanLevel;
+    private readonly int _amplitude;
+    private readonly double _frequency;
 
     /// <summary>
     /// Der Name des Flusses.
@@ -69,179 +53,152 @@ public class River
     public string Name { get; }
 
     /// <summary>
-    /// Event, das ausgelöst wird, wenn der Pegel kritisch hoch ist (> 8000).
+    /// Liste aller aufgezeichneten Messpunkte.
     /// </summary>
-    public event EventHandler<WaterLevelEventArgs>? CriticalHigh;
+    public IReadOnlyList<WaterDataPoint> History => _history.AsReadOnly();
 
     /// <summary>
-    /// Event, das ausgelöst wird, wenn der Pegel kritisch niedrig ist (< 250).
+    /// Initialisiert den Fluss.
     /// </summary>
-    public event EventHandler<WaterLevelEventArgs>? CriticalLow;
-
-    /// <summary>
-    /// Erstellt eine neue Instanz eines Flusses.
-    /// </summary>
-    /// <param name="name">Name des Flusses (z.B. Rhein).</param>
-    /// <param name="initialLevel">Start-Wasserstand.</param>
-    public River(string name, int initialLevel)
+    /// <param name="name">Name des Gewässers.</param>
+    /// <param name="meanLevel">Mittelwert.</param>
+    /// <param name="amplitude">Schwankungsbreite.</param>
+    public River(string name, int meanLevel, int amplitude)
     {
         Name = name;
-        _waterLevel = initialLevel;
+        _meanLevel = meanLevel;
+        _amplitude = amplitude;
+        _frequency = 0.2; // Etwas schnellere Frequenz für schönere Kurven
     }
 
     /// <summary>
-    /// Ändert den Wasserstand zufällig und prüft auf Grenzwerte.
+    /// Berechnet den Pegel für einen spezifischen Zeitpunkt und speichert ihn.
     /// </summary>
+    /// <param name="time">Der aktuelle Zeitpunkt.</param>
     /// <remarks>
-    /// Generiert einen neuen Wert zwischen 100 und 10.000.
-    /// Löst Events aus, wenn Grenzwerte überschritten/unterschritten werden.
+    /// Nutzt eine Sinus-Funktion basierend auf Ticks/Stunden für Determinismus.
     /// </remarks>
-    public void ChangeWaterLevel()
+    public void RecordMeasurement(DateTime time)
     {
-        // Tom der Seelige (Dozent): "Hier simulieren wir die Launen der Natur mittels Random."
-        // Adil der Planlose Chiller: "Zufall? So wie meine Klausurergebnisse."
-        
-        _waterLevel = _random.Next(100, 10001);
-        
-        Console.WriteLine($"[FLUSS] Der Pegel des {Name} ändert sich auf: {_waterLevel}");
+        // Wir nutzen den Stunden-Unterschied zum Start des Jahres für die Sinus-Berechnung
+        double hoursArg = (time - new DateTime(time.Year, 1, 1)).TotalHours;
 
-        // Prüfung auf Hochwasser
-        if (_waterLevel > 8000)
-        {
-            // Tobi das laute Runde: "ACHTUNG! ALLES LÄUFT ÜBER! RETTET DAS ESSEN!"
-            OnCriticalHigh(new WaterLevelEventArgs(_waterLevel));
-        }
-        // Prüfung auf Niedrigwasser
-        else if (_waterLevel < 250)
-        {
-            // Kubi der Osmanische Teddybär: "Das ist ja weniger Wasser als Fett in meiner Sucuk! ALARM!"
-            OnCriticalLow(new WaterLevelEventArgs(_waterLevel));
-        }
-    }
+        // Berechnung: Basis + Sinus + Rauschen
+        double sine = Math.Sin(hoursArg * _frequency);
+        int noise = _random.Next(-50, 51);
+        int currentLevel = _meanLevel + (int)(sine * _amplitude) + noise;
 
-    /// <summary>
-    /// Hilfsmethode zum Auslösen des Hochwasser-Events.
-    /// </summary>
-    /// <param name="e">Die Event-Daten.</param>
-    protected virtual void OnCriticalHigh(WaterLevelEventArgs e)
-    {
-        // Safe Invocation mit ?. Operator
-        CriticalHigh?.Invoke(this, e);
-    }
+        if (currentLevel < 0) currentLevel = 0;
 
-    /// <summary>
-    /// Hilfsmethode zum Auslösen des Niedrigwasser-Events.
-    /// </summary>
-    /// <param name="e">Die Event-Daten.</param>
-    protected virtual void OnCriticalLow(WaterLevelEventArgs e)
-    {
-        CriticalLow?.Invoke(this, e);
+        // CHARAKTER-STORY:
+        // Anas der Schlafende schreibt im Halbschlaf die Zahlen auf.
+        // Hoffentlich sind sie lesbar.
+        _history.Add(new WaterDataPoint(time, currentLevel));
     }
 }
 
 // ==========================================================================================
-// AUFGABE: Klasse Schiff (Subscriber) implementieren
-// ERWARTETES ERGEBNIS: Schiffe, die auf die Events reagieren und Nachrichten ausgeben.
+// AUFGABE: Export-Logik (CSV & ASCII)
+// ERWARTETES ERGEBNIS: Formatierte Strings für Excel oder Konsole.
 // ==========================================================================================
 
 /// <summary>
-/// Repräsentiert ein Schiff, das einen Fluss beobachtet.
+/// Hilfsklasse zum Exportieren von Flussdaten.
 /// </summary>
-public class Ship
+public static class GraphExporter
 {
     // CHARAKTER-STORY:
-    // Sergej der frierende Schachspieler sitzt an Deck: "Wenn das Schiff stoppt, wird die Heizung ausgehen? Ich friere jetzt schon."
-    // Kahn der Lange: "Ich stoß mir den Kopf an der Brücke, wenn das Wasser zu hoch ist."
-    
-    /// <summary>
-    /// Name des Schiffes.
-    /// </summary>
-    public string Name { get; }
+    // Tom der Seelige: "Eine saubere Formatierung ist das A und O einer jeden Abgabe."
+    // Kubi der Osmanische Teddybär: "Kann man das essen? Sieht aus wie eine Speisekarte."
+    // Sergej der frierende Schachspieler: "E4 nach H5... oh, das sind Wasserstände, keine Züge."
 
-    public Ship(string name)
+    /// <summary>
+    /// Erzeugt einen CSV-String (Comma Separated Values) für den Import in Excel.
+    /// </summary>
+    /// <param name="river">Der Fluss, dessen Daten exportiert werden sollen.</param>
+    /// <returns>Ein mehrzeiliger String im Format "Datum;Pegel".</returns>
+    /// <example>
+    /// <code>
+    /// string csv = GraphExporter.GetCsvOutput(meinFluss);
+    /// File.WriteAllText("daten.csv", csv);
+    /// </code>
+    /// </example>
+    public static string GetCsvOutput(River river)
     {
-        Name = name;
+        StringBuilder sb = new StringBuilder();
+        
+        // Header für CSV
+        sb.AppendLine("Zeitstempel;Wasserstand_cm");
+
+        foreach (var point in river.History)
+        {
+            // Formatierung: Deutsches Datumsformat, Semikolon als Trenner
+            sb.AppendLine($"{point.Timestamp:dd.MM.yyyy HH:mm};{point.Level}");
+        }
+
+        return sb.ToString();
     }
 
     /// <summary>
-    /// Reagiert auf zu hohen Wasserstand.
+    /// Erzeugt eine einfache visuelle Repräsentation für die Konsole.
     /// </summary>
-    /// <param name="sender">Der Auslöser (Fluss).</param>
-    /// <param name="e">Die Daten zum Wasserstand.</param>
-    public void OnHighWater(object? sender, WaterLevelEventArgs e)
+    /// <param name="river">Der zu visualisierende Fluss.</param>
+    public static void PrintConsoleGraph(River river)
     {
-        // Benjamin der Graue (Gandalf-Stimme): "Du kannst nicht vorbei! Die Fluten sind zu mächtig!"
-        var river = sender as River;
-        Console.WriteLine($" -> SCHIFF {Name}: Stoppt Motoren auf {river?.Name}! Zu viel Wasser ({e.CurrentLevel}). Gefahr von Brückenkollision (Kahn pass auf!).");
-    }
+        Console.WriteLine($"\n--- ASCII Graph für: {river.Name} ---");
+        Console.WriteLine("Datum/Zeit       | Pegel (visualisiert)");
+        Console.WriteLine("-----------------|-----------------------------------------");
 
-    /// <summary>
-    /// Reagiert auf zu niedrigen Wasserstand.
-    /// </summary>
-    /// <param name="sender">Der Auslöser (Fluss).</param>
-    /// <param name="e">Die Daten zum Wasserstand.</param>
-    public void OnLowWater(object? sender, WaterLevelEventArgs e)
-    {
-        // Anas der Schlafende wacht kurz auf: "Hä? Sind wir auf Grund gelaufen? *gähn* Weiterpennen."
-        var river = sender as River;
-        Console.WriteLine($" -> SCHIFF {Name}: Wirft Anker auf {river?.Name}! Zu wenig Wasser ({e.CurrentLevel}). Wir sitzen fest.");
+        foreach (var point in river.History)
+        {
+            // Skalierung: Wir teilen durch 200, damit der Balken auf den Bildschirm passt.
+            // Tobi das laute Runde: "MACH DEN BALKEN LÄNGER!! MEHR!!"
+            int barLength = point.Level / 200; 
+            string bar = new string('#', barLength); // Erstellt einen String aus '#'
+            
+            // Warnfarben Logik
+            if (point.Level > 8000) Console.ForegroundColor = ConsoleColor.Red;
+            else if (point.Level < 2000) Console.ForegroundColor = ConsoleColor.Yellow;
+            else Console.ForegroundColor = ConsoleColor.Green;
+
+            Console.WriteLine($"{point.Timestamp:dd.MM HH:mm} | {point.Level,5} {bar}");
+        }
+        Console.ResetColor();
     }
 }
 
 // ==========================================================================================
-// AUFGABE: Hauptprogramm (Main)
-// ERWARTETES ERGEBNIS: Instanziierung der Objekte, Verknüpfung der Events und Simulation.
+// AUFGABE: Main Program execution
 // ==========================================================================================
 
 class Program
 {
     static void Main()
     {
-        // CHARAKTER-STORY:
-        // Tom der Seelige: "So, jetzt verdrahten wir das Ganze. Passt gut auf!"
-        // Osvaldo der Weiße: "Die Architektur muss stimmen. Dependency Injection wäre besser, aber für heute reicht 'new'."
-        
-        Console.WriteLine("--- Simulation gestartet: 23. Januar 2026 ---");
+        Console.WriteLine("--- Datenerfassung gestartet ---");
 
-        // 1. Flüsse erstellen
-        River rhein = new River("Rhein", 5000);
-        River donau = new River("Donau", 5000);
+        // 1. Setup
+        // Andrey der entspannte Russe stellt die Messgeräte auf. "Keine Hektik."
+        River rhein = new River("Rhein", 5000, 3500);
+        DateTime startTime = new DateTime(2026, 01, 23, 8, 0, 0); // Start: 23. Jan 2026, 08:00
 
-        // 2. Schiffe erstellen
-        Ship rheingold = new Ship("Rheingold");
-        Ship lorelei = new Ship("Lorelei");
-        Ship xaver = new Ship("Xaver");
-        Ship franz = new Ship("Franz");
-
-        // 3. Abonnieren der Events (Subscription)
-        // Rhein-Beobachter
-        rhein.CriticalHigh += rheingold.OnHighWater;
-        rhein.CriticalLow += rheingold.OnLowWater;
-        
-        rhein.CriticalHigh += lorelei.OnHighWater;
-        rhein.CriticalLow += lorelei.OnLowWater;
-
-        // Donau-Beobachter
-        donau.CriticalHigh += xaver.OnHighWater;
-        donau.CriticalLow += xaver.OnLowWater;
-
-        donau.CriticalHigh += franz.OnHighWater;
-        donau.CriticalLow += franz.OnLowWater;
-
-        // 4. Simulation durchführen
-        // Kubi drückt wild Knöpfe: "Mach mal Wellen jetzt!"
-        Console.WriteLine("\n--- Simuliere Wasserstandsänderungen ---");
-
-        for (int i = 0; i < 5; i++)
+        // 2. Simulation (Wir simulieren 24 Stunden in 1-Stunden-Schritten)
+        for (int i = 0; i < 24; i++)
         {
-            Console.WriteLine($"\n--- Durchlauf {i + 1} ---");
-            rhein.ChangeWaterLevel();
-            donau.ChangeWaterLevel();
-            
-            // Kurze Pause für die Dramatik (Andrey atmet tief ein und aus)
-            System.Threading.Thread.Sleep(500); 
+            DateTime currentTime = startTime.AddHours(i);
+            rhein.RecordMeasurement(currentTime);
         }
 
-        Console.WriteLine("\n--- Simulation beendet. Adil geht jetzt chillen. ---");
+        // 3. Output CSV (Der rohe Daten-Output)
+        Console.WriteLine("\n[CSV EXPORT START - Kopiere das in Excel]");
+        string csvData = GraphExporter.GetCsvOutput(rhein);
+        Console.WriteLine(csvData);
+        Console.WriteLine("[CSV EXPORT ENDE]");
+
+        // 4. Output Visuell (Für Kubi, damit er bunte Farben sieht)
+        // Kubi: "Ooooh, das Rote sieht gefährlich aus. Wie scharfe Soße."
+        GraphExporter.PrintConsoleGraph(rhein);
+
+        Console.WriteLine("\n--- Analyse beendet. Kahn der Lange hat sich nicht den Kopf gestoßen. ---");
     }
 }
