@@ -1,175 +1,247 @@
-/* * ======================================================================================
- * AUFGABENSTELLUNG:
- * 1. Modellierung der Klasse 'Fluss' mit Name und Wasserstand (100 - 10.000).
- * 2. Implementierung einer Methode zur zufälligen Änderung des Wasserstands.
- * 3. Definition von zwei Events: Warnung bei < 250 (Niedrig) und > 8.000 (Hoch).
- * 4. Modellierung der Klasse 'Schiff' (Beobachter) mit Reaktion (Stopp) auf Gefahren.
- * 5. Testprogramm: Rhein (Rheingold, Lorelei) und Donau (Xaver, Franz).
- * ======================================================================================
+/*
+ * ==============================================================================================
+ * AUFGABENSTELLUNG: Wasserstand 1
+ * * 1. Modellieren Sie einen 'Fluss' mit Namen und Wasserstand (100 - 10.000).
+ * 2. Der Fluss soll Methoden zur zufälligen Änderung des Wasserstands haben.
+ * 3. Implementieren Sie zwei Events:
+ * - Warnung bei Niedrigwasser (< 250)
+ * - Warnung bei Hochwasser (> 8.000)
+ * 4. Modellieren Sie 'Schiff' als Beobachter.
+ * 5. Das Schiff muss auf die Events reagieren (Fahrt stoppen).
+ * 6. Testlauf mit Rhein (Rheingold, Lorelei) und Donau (Xaver, Franz).
+ * ==============================================================================================
  */
 
 using System;
-using System.Collections.Generic;
 
-namespace WasserstandUeberwachung
+namespace WasserstandEvents;
+
+// ==========================================================================================
+// AUFGABE: Definition der Event-Daten (EventArgs)
+// ERWARTETES ERGEBNIS: Eine Klasse, die den aktuellen Wasserstand transportiert.
+// ==========================================================================================
+
+// CHARAKTER-STORY:
+// Osvaldo der Weiße: "Um Daten sauber zu übermitteln, benötigen wir eine strukturierte Klasse."
+// Benjamin der Graue: "Ein einfacher Bote würde reichen, aber Osvaldo besteht auf Protokolle."
+// Kubi der Osmanische Teddybär: "Ist mir egal, solange auf dem Zettel steht, wo die Sucuk ist."
+
+/// <summary>
+/// Beinhaltet die Daten für Wasserstands-Events.
+/// </summary>
+public class WaterLevelEventArgs : EventArgs
 {
-    // ==================================================================================
-    // ABSCHNITT 1: Die Definition des Delegaten und der Fluss-Klasse
-    // Aufgabe: Erstelle die Klasse Fluss, die Events anbietet, wenn Grenzwerte verletzt werden.
-    // Erwartetes Ergebnis: Eine Klasse, die sich selbst überwacht und bei Bedarf 'schreit'.
-    // ==================================================================================
-
-    // TOM DER SEELIGE (Dozent): "Hört mal kurz zu. Wir verwenden hier das Observer-Pattern.
-    // Der Fluss ist das 'Subject', die Schiffe sind die 'Observer'. Events sind in C# nichts anderes
-    // als kapselte Delegaten. Das ist klausurrelevant!"
-
-    // ANAS DER SCHLAFENDE: "Mmmh... Observer... beobachtet mich jemand beim Schlafen? *gähn*"
-
-    // BENJAMIN DER GRAUE: "Ein Fluss ist niemals derselbe, wenn man zweimal hineinsteigt.
-    // Doch wenn er über die Ufer tritt, müssen wir bereit sein. Das Event ist unser Omen."
+    /// <summary>
+    /// Der aktuelle Wasserstand zum Zeitpunkt des Events.
+    /// </summary>
+    public int CurrentLevel { get; }
 
     /// <summary>
-    /// Repräsentiert einen Fluss, dessen Pegelstand schwanken kann.
+    /// Konstruktor für die Event-Daten.
     /// </summary>
-    public class Fluss
+    /// <param name="level">Der gemessene Wasserstand.</param>
+    public WaterLevelEventArgs(int level)
     {
-        public string Name { get; }
-        public int Wasserstand { get; private set; }
-        private readonly Random _zufall = new Random();
+        CurrentLevel = level;
+    }
+}
 
-        // Best Practice: Nutzung von EventHandler<T> ist der .NET Standard.
-        // Hier definieren wir eigene Events für spezifische Szenarien.
-        public event EventHandler<string> KritischerPegelZuHoch;
-        public event EventHandler<string> KritischerPegelZuNiedrig;
+// ==========================================================================================
+// AUFGABE: Klasse Fluss (Publisher) implementieren
+// ERWARTETES ERGEBNIS: Eine Klasse, die den Wasserstand ändert und bei Grenzwerten Events feuert.
+// ==========================================================================================
 
-        public Fluss(string name)
+/// <summary>
+/// Repräsentiert einen Fluss, der seinen Wasserstand überwacht und Warnungen sendet.
+/// </summary>
+public class River
+{
+    // CHARAKTER-STORY:
+    // Andrey der entspannte Russe: "Ein Fluss ist wie das Leben. Mal ruhig, mal wild. Man muss fließen."
+    // Tobi das laute Runde: "UND MANCHMAL IST ER LAUT! WIE HOCHWASSER!"
+    
+    private int _waterLevel;
+    private readonly Random _random = new Random();
+
+    /// <summary>
+    /// Der Name des Flusses.
+    /// </summary>
+    public string Name { get; }
+
+    /// <summary>
+    /// Event, das ausgelöst wird, wenn der Pegel kritisch hoch ist (> 8000).
+    /// </summary>
+    public event EventHandler<WaterLevelEventArgs>? CriticalHigh;
+
+    /// <summary>
+    /// Event, das ausgelöst wird, wenn der Pegel kritisch niedrig ist (< 250).
+    /// </summary>
+    public event EventHandler<WaterLevelEventArgs>? CriticalLow;
+
+    /// <summary>
+    /// Erstellt eine neue Instanz eines Flusses.
+    /// </summary>
+    /// <param name="name">Name des Flusses (z.B. Rhein).</param>
+    /// <param name="initialLevel">Start-Wasserstand.</param>
+    public River(string name, int initialLevel)
+    {
+        Name = name;
+        _waterLevel = initialLevel;
+    }
+
+    /// <summary>
+    /// Ändert den Wasserstand zufällig und prüft auf Grenzwerte.
+    /// </summary>
+    /// <remarks>
+    /// Generiert einen neuen Wert zwischen 100 und 10.000.
+    /// Löst Events aus, wenn Grenzwerte überschritten/unterschritten werden.
+    /// </remarks>
+    public void ChangeWaterLevel()
+    {
+        // Tom der Seelige (Dozent): "Hier simulieren wir die Launen der Natur mittels Random."
+        // Adil der Planlose Chiller: "Zufall? So wie meine Klausurergebnisse."
+        
+        _waterLevel = _random.Next(100, 10001);
+        
+        Console.WriteLine($"[FLUSS] Der Pegel des {Name} ändert sich auf: {_waterLevel}");
+
+        // Prüfung auf Hochwasser
+        if (_waterLevel > 8000)
         {
-            Name = name;
-            // Initialer Wasserstand im sicheren Bereich
-            Wasserstand = 5000; 
+            // Tobi das laute Runde: "ACHTUNG! ALLES LÄUFT ÜBER! RETTET DAS ESSEN!"
+            OnCriticalHigh(new WaterLevelEventArgs(_waterLevel));
         }
-
-        public void AendereWasserstand()
+        // Prüfung auf Niedrigwasser
+        else if (_waterLevel < 250)
         {
-            // Simuliert eine Änderung. Range 100 bis 10.000
-            Wasserstand = _zufall.Next(100, 10001);
-
-            // TOBI DER LAUTE: "ACHTUNG! DER WERT HAT SICH GEÄNDERT! ICH SEHE EINE " + Wasserstand + "!"
-            
-            PruefeGefahr();
-        }
-
-        private void PruefeGefahr()
-        {
-            // KUBI DER OSMANISCHE TEDDYBÄR: "Junge, 8000? Da säuft ja mein Bärenfell ab.
-            // Und unter 250? Da sitz ich auf dem Trockenen wie in einer Shisha-Bar ohne Tabak."
-
-            if (Wasserstand > 8000)
-            {
-                // Feuert das Event, wenn Abonnenten vorhanden sind (?.Invoke)
-                KritischerPegelZuHoch?.Invoke(this, $"ACHTUNG: Hochwasser im {Name}! Pegel: {Wasserstand}");
-            }
-            else if (Wasserstand < 250)
-            {
-                KritischerPegelZuNiedrig?.Invoke(this, $"ACHTUNG: Niedrigwasser im {Name}! Pegel: {Wasserstand}");
-            }
+            // Kubi der Osmanische Teddybär: "Das ist ja weniger Wasser als Fett in meiner Sucuk! ALARM!"
+            OnCriticalLow(new WaterLevelEventArgs(_waterLevel));
         }
     }
 
-    // ==================================================================================
-    // ABSCHNITT 2: Die Beobachter (Schiffe)
-    // Aufgabe: Schiffe sollen auf die Rufe des Flusses reagieren und stoppen.
-    // Erwartetes Ergebnis: Konsolenausgabe, sobald ein Event eintritt.
-    // ==================================================================================
-
-    // KAHN DER LANGE: "Ich sehe die Schiffe dort unten. Kleine Nussschalen. 
-    // Aber wenn sie gut programmiert sind, hören sie auf den Fluss."
-
-    // TOBI DER LAUTE: "STOPPEN! SOFORT STOPPEN! KEINE DISKUSSION!"
-
-    public class Schiff
+    /// <summary>
+    /// Hilfsmethode zum Auslösen des Hochwasser-Events.
+    /// </summary>
+    /// <param name="e">Die Event-Daten.</param>
+    protected virtual void OnCriticalHigh(WaterLevelEventArgs e)
     {
-        public string Name { get; }
-
-        public Schiff(string name)
-        {
-            Name = name;
-        }
-
-        // Event-Handler Methode: Muss der Signatur des Events entsprechen (object sender, string message)
-        public void BeiGefahrStoppen(object sender, string nachricht)
-        {
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine($"[SCHIFF {Name}]: Empfange Warnung -> '{nachricht}'. Ich stoppe sofort!");
-            Console.ResetColor();
-        }
+        // Safe Invocation mit ?. Operator
+        CriticalHigh?.Invoke(this, e);
     }
 
-    class Program
+    /// <summary>
+    /// Hilfsmethode zum Auslösen des Niedrigwasser-Events.
+    /// </summary>
+    /// <param name="e">Die Event-Daten.</param>
+    protected virtual void OnCriticalLow(WaterLevelEventArgs e)
     {
-        static void Main(string[] args)
+        CriticalLow?.Invoke(this, e);
+    }
+}
+
+// ==========================================================================================
+// AUFGABE: Klasse Schiff (Subscriber) implementieren
+// ERWARTETES ERGEBNIS: Schiffe, die auf die Events reagieren und Nachrichten ausgeben.
+// ==========================================================================================
+
+/// <summary>
+/// Repräsentiert ein Schiff, das einen Fluss beobachtet.
+/// </summary>
+public class Ship
+{
+    // CHARAKTER-STORY:
+    // Sergej der frierende Schachspieler sitzt an Deck: "Wenn das Schiff stoppt, wird die Heizung ausgehen? Ich friere jetzt schon."
+    // Kahn der Lange: "Ich stoß mir den Kopf an der Brücke, wenn das Wasser zu hoch ist."
+    
+    /// <summary>
+    /// Name des Schiffes.
+    /// </summary>
+    public string Name { get; }
+
+    public Ship(string name)
+    {
+        Name = name;
+    }
+
+    /// <summary>
+    /// Reagiert auf zu hohen Wasserstand.
+    /// </summary>
+    /// <param name="sender">Der Auslöser (Fluss).</param>
+    /// <param name="e">Die Daten zum Wasserstand.</param>
+    public void OnHighWater(object? sender, WaterLevelEventArgs e)
+    {
+        // Benjamin der Graue (Gandalf-Stimme): "Du kannst nicht vorbei! Die Fluten sind zu mächtig!"
+        var river = sender as River;
+        Console.WriteLine($" -> SCHIFF {Name}: Stoppt Motoren auf {river?.Name}! Zu viel Wasser ({e.CurrentLevel}). Gefahr von Brückenkollision (Kahn pass auf!).");
+    }
+
+    /// <summary>
+    /// Reagiert auf zu niedrigen Wasserstand.
+    /// </summary>
+    /// <param name="sender">Der Auslöser (Fluss).</param>
+    /// <param name="e">Die Daten zum Wasserstand.</param>
+    public void OnLowWater(object? sender, WaterLevelEventArgs e)
+    {
+        // Anas der Schlafende wacht kurz auf: "Hä? Sind wir auf Grund gelaufen? *gähn* Weiterpennen."
+        var river = sender as River;
+        Console.WriteLine($" -> SCHIFF {Name}: Wirft Anker auf {river?.Name}! Zu wenig Wasser ({e.CurrentLevel}). Wir sitzen fest.");
+    }
+}
+
+// ==========================================================================================
+// AUFGABE: Hauptprogramm (Main)
+// ERWARTETES ERGEBNIS: Instanziierung der Objekte, Verknüpfung der Events und Simulation.
+// ==========================================================================================
+
+class Program
+{
+    static void Main()
+    {
+        // CHARAKTER-STORY:
+        // Tom der Seelige: "So, jetzt verdrahten wir das Ganze. Passt gut auf!"
+        // Osvaldo der Weiße: "Die Architektur muss stimmen. Dependency Injection wäre besser, aber für heute reicht 'new'."
+        
+        Console.WriteLine("--- Simulation gestartet: 23. Januar 2026 ---");
+
+        // 1. Flüsse erstellen
+        River rhein = new River("Rhein", 5000);
+        River donau = new River("Donau", 5000);
+
+        // 2. Schiffe erstellen
+        Ship rheingold = new Ship("Rheingold");
+        Ship lorelei = new Ship("Lorelei");
+        Ship xaver = new Ship("Xaver");
+        Ship franz = new Ship("Franz");
+
+        // 3. Abonnieren der Events (Subscription)
+        // Rhein-Beobachter
+        rhein.CriticalHigh += rheingold.OnHighWater;
+        rhein.CriticalLow += rheingold.OnLowWater;
+        
+        rhein.CriticalHigh += lorelei.OnHighWater;
+        rhein.CriticalLow += lorelei.OnLowWater;
+
+        // Donau-Beobachter
+        donau.CriticalHigh += xaver.OnHighWater;
+        donau.CriticalLow += xaver.OnLowWater;
+
+        donau.CriticalHigh += franz.OnHighWater;
+        donau.CriticalLow += franz.OnLowWater;
+
+        // 4. Simulation durchführen
+        // Kubi drückt wild Knöpfe: "Mach mal Wellen jetzt!"
+        Console.WriteLine("\n--- Simuliere Wasserstandsänderungen ---");
+
+        for (int i = 0; i < 5; i++)
         {
-            // ==================================================================================
-            // ABSCHNITT 3: Setup und Simulation
-            // Aufgabe: Instanziierung der Objekte und Verknüpfung der Events (Abonnieren).
-            // Erwartetes Ergebnis: Simulation von Pegeländerungen und Reaktion der passenden Schiffe.
-            // ==================================================================================
-
-            // TOM: "Jetzt verdrahten wir die Logik. Das '+=' ist entscheidend. Ohne das Abo hört keiner zu."
-
-            // KUBI: "Kann ich den 'Rhein' auch mit Raki füllen? Nein? Langweilig."
-
-            // 1. Flüsse erstellen
-            Fluss rhein = new Fluss("Rhein");
-            Fluss donau = new Fluss("Donau");
-
-            // 2. Schiffe erstellen
-            Schiff rheingold = new Schiff("Rheingold");
-            Schiff lorelei = new Schiff("Lorelei");
-            Schiff xaver = new Schiff("Xaver");
-            Schiff franz = new Schiff("Franz");
-
-            // 3. Events abonnieren (Wiring)
-            // Rhein-Beobachter
-            rhein.KritischerPegelZuHoch += rheingold.BeiGefahrStoppen;
-            rhein.KritischerPegelZuNiedrig += rheingold.BeiGefahrStoppen;
+            Console.WriteLine($"\n--- Durchlauf {i + 1} ---");
+            rhein.ChangeWaterLevel();
+            donau.ChangeWaterLevel();
             
-            rhein.KritischerPegelZuHoch += lorelei.BeiGefahrStoppen;
-            rhein.KritischerPegelZuNiedrig += lorelei.BeiGefahrStoppen;
-
-            // Donau-Beobachter
-            donau.KritischerPegelZuHoch += xaver.BeiGefahrStoppen;
-            donau.KritischerPegelZuNiedrig += xaver.BeiGefahrStoppen;
-
-            // ANAS: "Zzz... ist Xaver schon da? ... Egal."
-
-            // ==================================================================================
-            // ABSCHNITT 4: Der Testlauf
-            // Aufgabe: Den Wasserstand mehrfach ändern, um Events zu provozieren.
-            // Erwartetes Ergebnis: Zufällige Warnmeldungen auf der Konsole.
-            // ==================================================================================
-
-            // BENJAMIN: "Lass die Würfel rollen. Auch das Chaos hat eine Ordnung."
-            
-            Console.WriteLine("--- Simulation startet ---");
-
-            for (int i = 0; i < 10; i++)
-            {
-                Console.WriteLine($"\n--- Tag {i + 1} ---");
-                
-                // Wir ändern die Pegel
-                rhein.AendereWasserstand();
-                donau.AendereWasserstand();
-
-                // Kurze Pause für Dramatik
-                System.Threading.Thread.Sleep(200);
-            }
-
-            // KUBI: "Fertig? Gut. Wo ist jetzt dieser verdammte Honigtopf?"
-            // TOBI: "PROGRAMM ENDE! ERFOLGREICH! KEINER IST ERTRUNKEN!"
-            
-            Console.WriteLine("\n--- Simulation beendet ---");
-            Console.ReadLine();
+            // Kurze Pause für die Dramatik (Andrey atmet tief ein und aus)
+            System.Threading.Thread.Sleep(500); 
         }
+
+        Console.WriteLine("\n--- Simulation beendet. Adil geht jetzt chillen. ---");
     }
 }
