@@ -1,2 +1,4 @@
 <Solution>
-  <Project Pa
+  <Project Path="StringExplorer.Tests/StringExplorer.Tests.csproj" />
+  <Project Path="StringExplorer/StringExplorer.csproj" />
+</Solution>
