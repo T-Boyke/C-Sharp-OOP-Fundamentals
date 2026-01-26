@@ -1,56 +1,43 @@
-# 16_StaticMembers: Statische Member
+[⬅️ Zurück zum Hauptverzeichnis](../README.md)
 
-## 📚 Theorie
+# 16 - Statische Member
 
-### 1. `static` Keyword
-Das Schlüsselwort `static` bedeutet, dass ein Member (Feld, Methode, Property) zur **Klasse selbst** gehört und nicht zu einer spezifischen Instanz (Objekt).
+## 💡 Theorie
+`static` trennt Daten vom Objekt. Sie gehören zur **Klasse**.
 
-### 2. Statische Felder
-*   Werden von allen Instanzen der Klasse geteilt.
-*   Gibt es nur **einmal** im Speicher.
-*   Beispiel: `InstanzZähler`, Konfigurationswerte.
+### Unterschiede
+| Instanz (Normal) | Statisch (`static`) |
+| --- | --- |
+| existiert pro `new Object()` | existiert **einmal** pro App |
+| Zugriff über Variable (`obj.Feld`) | Zugriff über Klassenname (`Klasse.Feld`) |
+| `this` verfügbar | `this` **nicht** verfügbar |
 
-```csharp
-public class Auto {
-    public static int AnzahlAutos = 0;
-    public Auto() { AnzahlAutos++; }
-}
-```
-
-### 3. Statische Methoden
-*   Können aufgerufen werden, ohne ein Objekt zu erzeugen: `Math.Sqrt(9)`.
-*   Können **nur** auf andere statische Member zugreifen (kein `this`!).
-*   Beispiel: Hilfsfunktionen, `Main`-Methode.
-
-### 4. Statische Klassen
-*   Können **nur** statische Member enthalten.
-*   Können nicht instanziiert werden.
-*   Beispiel: `System.Math`, `System.Console`.
-
----
+### Wann nutzen?
+- **Utility Funktionen**: `Math.Pow()`, `Calculator.Add()`
+- **Globale Zähler**: `NextId`
+- **Konstanten**: `Math.PI`
 
 ## 📝 Aufgabenstellung
-> [!NOTE]
-> Quelle: Legacy `Aufgabe_04_Static_Member`
+1.  `Calculator`: Statische Klasse für Mathe.
+2.  `Entity`: Normale Klasse mit statischem Feld `_instanceCount`.
 
-1.  **Calculator**: Eine rein statische Klasse für Rechenoperationen (`Add`, `Sub`, `Mult`, `Div`).
-2.  **Entity**: Eine Klasse, die mitzählt, wie viele Instanzen von ihr erzeugt wurden (`InstanceCount`).
-
----
-
-## 📐 UML-Klassendiagramm
+## 🧩 UML Klassendiagramm
 
 ```mermaid
 classDiagram
     class Calculator {
         <<static>>
-        +Add(double a, double b)$ double
-        +Subtract(double a, double b)$ double
+        +Add(a, b)$
     }
 
     class Entity {
-        -static int _count
+        -static int _instanceCount
         +Entity()
         +GetCount()$ int
     }
 ```
+
+## ✅ Definition of Done
+- [ ] `Calculator` ist `static class` und instanziierbar (Compiler Fehler wenn `new`).
+- [ ] `Entity` zählt Instanzen global hoch.
+- [ ] Tests bestätigen, dass `_instanceCount` geteilt wird.
