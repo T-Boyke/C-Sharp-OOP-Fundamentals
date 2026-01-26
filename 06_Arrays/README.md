@@ -1,114 +1,91 @@
 [⬅️ Zurück zum Hauptverzeichnis](../README.md)
 
-# 06_Arrays: Arrays, Listen und Algorithmen
+# 06 - Arrays & Algorithmen
 
-## 📚 Theorie: Arrays in C#
+## 💡 Theorie
+Arrays sind die fundamentalste Datenstruktur.
+- **Speicher**: Fester, zusammenhängender Block.
+- **Index**: Zugriff in O(1).
+- **Iteration**: Ideal für `for`-Schleifen (wenn Index gebraucht wird) oder `foreach` (Read-Only).
 
-Ein **Array** ist wie ein Regal mit festen Fächern. Jedes Fach hat eine Nummer (Index) und kann einen Wert speichern.
-
-### 1. Grundlagen
-*   **Datentyp**: Alle Elemente müssen denselben Typ haben (z.B. nur `int` oder nur `string`).
-*   **Feste Größe**: Einmal erstellt, kann die Größe eines Arrays nicht mehr geändert werden (anders als bei einer `List<T>`).
-*   **0-Indiziert**: Das erste Element steht an Index `0`, das letzte an `Länge - 1`.
-
-### 2. Syntax im Vergleich
+### Array Initialisierung (Modern)
 ```csharp
-// 1. Klassische Erzeugung (C# 1.0+)
-// Ein leeres Array für 5 Zahlen (Standardwert 0)
-int[] zahlen = new int[5]; 
-
-// 2. Direktinitialisierung (C# 3.0+)
-// Größe wird automatisch ermittelt (hier 3)
-string[] namen = new string[] { "Max", "Paul", "Lisa" };
-
-// 3. Collection Expressions (C# 12 / .NET 8+)
-// Die modernste und sauberste Schreibweise
-int[] fibonacci = [1, 1, 2, 3, 5, 8];
+// "Collection Expressions" in C# 12
+int[] numbers = [1, 2, 3, 4, 5]; 
+bool[] bools = new bool[50]; // Standard false
 ```
-
-### 3. Zugriff und Schleifen
-Um Arrays zu durchlaufen, nutzen wir meist `for` oder `foreach`.
-
-**Der Klassiker (for-Schleife):**
-Perfekt, wenn man den Index `i` benötigt (z.B. um Werte zu ändern).
-```csharp
-for (int i = 0; i < zahlen.Length; i++)
-{
-    zahlen[i] = i * 2; // Werte ändern
-}
-```
-
-**Die Moderne (foreach-Schleife):**
-Besser, wenn man die Werte nur *lesen* will. Sicherer gegen Index-Fehler.
-```csharp
-foreach (int zahl in fibonacci)
-{
-    Console.WriteLine(zahl);
-}
-```
-
-### 4. Häufige Fehler
-> [!CAUTION]
-> **IndexOutOfRangeException**: Passiert, wenn man auf ein Element zugreift, das nicht existiert.
-> ```csharp
-> int[] arr = [1, 2, 3];
-> Console.WriteLine(arr[3]); // CRASH! Index 3 gibt es nicht (nur 0, 1, 2).
-> ```
-
----
 
 ## 📝 Aufgabenstellung
-> [!NOTE]
-> Quelle: `06 Aufgaben Arrays eindim.pdf` (Tom Selig, BITLC)
 
-### Aufgabe 1: Array füllen
-Schreiben Sie ein Programm, das ein Array mit 10 zufälligen Integer-Werten zwischen 1 und 100 füllt. Geben Sie anschließend die 10 Werte auf der Konsole aus.
-**Beispiel-Bildschirmausgabe:**
-`37, 2, 93, 45, 81, 89, 12, 19, 66, 20`
+### 1. Random Array
+Erstellen Sie ein Array der Länge 10, gefüllt mit Zufallszahlen (1-100).
 
-### Aufgabe 2: Quadratzahlen
-Schreiben Sie ein Programm, das die Quadratzahlen von 1 bis 10 in einem Array speichert. Geben Sie die Zahlen anschließend in umgekehrter Reihenfolge wieder auf der Konsole aus.
-**Beispiel-Bildschirmausgabe:**
-`100, 81, 64, 49, 36, 25, 16, 9, 4, 1`
+### 2. Quadratzahlen & Reverse
+Berechnen Sie die Quadrate von 1 bis 10 (`[1, 4, 9...]`).
+Erstellen Sie eine **Kopie**, die umgekehrt ist (`[100, 81...]`).
 
-### Aufgabe 3: Vor- und Nachname
-Schreiben Sie ein Programm, das zwei String-Arrays gleicher Größe erstellt, die Größe soll der Benutzer festlegen. Der Benutzer soll anschließend in einer Schleife Vor- und Nachnamen von Personen eingeben.
+### 3. Statistik (Min, Max, Sum, Avg)
+Analysieren Sie ein Array und ermitteln Sie:
+- Minimum
+- Maximum
+- Summe
+- Durchschnitt
+*Return-Typ*: Ein `record` oder Klasse `ArrayStatistics`.
 
-### Aufgabe 4: Statistik
-Schreiben Sie ein Programm, das ein Array mit 10 zufälligen Zahlen zwischen 1 und 99 füllt. Geben Sie danach auf der Konsole die größte Zahl, die kleinste Zahl, den Durchschnitt der Zahlen und die Summe der Zahlen aus.
+### 4. Lotto (6 aus 49)
+Simulieren Sie eine Ziehung.
+*Challenge*: Verwenden Sie **kein** `int[6]` für die Gezogenen, sondern ein `bool[50]`, bei dem der Index `true` gesetzt wird, wenn die Kugel gezogen wurde.
+Dies vermeidet Dubletten-Prüfung durch Schleifen (O(1) Check).
 
-### Aufgabe 5: Lottozahlen 1
-Schreiben Sie ein Programm, das 6 zufällige Zahlen zwischen 1 und 49 wählt. Speichern Sie diese nicht in einem Array der Größe 6, sondern erstellen Sie einen Boolean-Array der Größe 49.
+### 5. Binär-Konverter (8-Bit)
+Wandeln Sie eine Zahl (0-255) in binär um.
+Speichern Sie die Bits in einem `int[8]`.
+*Beispiel*: `42` -> `[0,0,1,0,1,0,1,0]`
 
-### Aufgabe 6: Binärzahlen 1
-Schreiben Sie ein Programm, das eine maximal 8 Bit große Dezimalzahl in eine Binärzahl umrechnet. Legen Sie dazu ein Integer-Array der Größe 8 an.
-
----
-
-## 📐 UML-Klassendiagramm
+## 🧩 UML Klassendiagramm
 
 ```mermaid
 classDiagram
     class Program {
-        +Main() void
+        +Main() static
     }
     
-    class ConsoleUI {
-        -ArrayService arrayService
-        -StatisticService statisticService
-        -LottoService lottoService
-        -BinaryService binaryService
-        +Run() void
+    class ArrayService {
+        +CreateRandomArray(int length, int min, int max) int[] static
+        +GetSquares(int n) int[] static
+        +ReverseCopy(int[] input) int[] static
     }
 
     class StatisticService {
-        +CalculateStatistics(int[] numbers) ArrayStatistics
+        +Calculate(int[] numbers) ArrayStatistics static
     }
+
+    class ArrayStatistics {
+        +int Min
+        +int Max
+        +int Sum
+        +double Average
+    }
+    <<Record>> ArrayStatistics
 
     class LottoService {
-        +DrawLottoNumbers() bool[]
+        +DrawSixOutOfFortyNine() bool[] static
     }
 
-    ConsoleUI --> StatisticService
-    ConsoleUI --> LottoService
+    class BinaryService {
+        +ToBinary8Bit(int number) int[] static
+    }
+
+    Program ..> ArrayService : uses
+    Program ..> StatisticService : uses
+    Program ..> LottoService : uses
+    Program ..> BinaryService : uses
+    StatisticService --> ArrayStatistics : returns
 ```
+
+## ✅ Definition of Done
+- [ ] Alle Services sauber getrennt (SFC).
+- [ ] Lotto-Logik nutzt Bool-Array (O(1)).
+- [ ] Binär-Logik funktioniert für Randwerte (0, 255).
+- [ ] XML Dokumentation vollständig.
+- [ ] Unit Tests grün.

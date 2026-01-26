@@ -76,7 +76,7 @@ Dieses Repository ist chronologisch und thematisch strukturiert. Jede Unit enth�
 | [04](./04_Methods) | **Methoden** | Parameter, Return, Call Stack | ✅ |
 | [05](./05_Strings) | **Strings & Memory** | Heap vs Stack, String Manipulation | ✅ |
 | **Phase 2** | **Object Oriented Programming** | | |
-| [06](./06_Arrays) | **Arrays** | 1D Arrays, Iteration, Algorithmen | 🚧 |
+| [06](./06_Arrays) | **Arrays** | 1D Arrays, Iteration, Algorithmen | ✅ |
 | [07](./07_ArraysMulti) | **Multidimensionale Arrays** | 2D/3D Arrays, Matrix-Operationen | 🚧 |
 | [08](./08_Procedures) | **Prozeduren** | Void Methoden, Side-Effects | 🚧 |
 | [09](./09_Functions) | **Funktionen** | Return Values, Pure Functions | 🚧 |
