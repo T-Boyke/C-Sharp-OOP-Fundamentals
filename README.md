@@ -74,7 +74,7 @@ Dieses Repository ist chronologisch und thematisch strukturiert. Jede Unit enth�
 | [02](./02_Basics) | **Grundlagen** | Variablen, Datentypen, Operatoren | ✅ |
 | [03](./03_ControlFlow) | **Kontrollstrukturen** | If, Switch, Loops | ✅ |
 | [04](./04_Methods) | **Methoden** | Parameter, Return, Call Stack | ✅ |
-| [05](./05_Strings) | **Strings & Memory** | Heap vs Stack, String Manipulation | 🚧 |
+| [05](./05_Strings) | **Strings & Memory** | Heap vs Stack, String Manipulation | ✅ |
 | **Phase 2** | **Object Oriented Programming** | | |
 | [06](./06_Arrays) | **Arrays** | 1D Arrays, Iteration, Algorithmen | 🚧 |
 | [07](./07_ArraysMulti) | **Multidimensionale Arrays** | 2D/3D Arrays, Matrix-Operationen | 🚧 |
