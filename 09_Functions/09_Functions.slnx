@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="FunctionsApp.Tests/FunctionsApp.Tests.csproj" />
+  <Project Path="FunctionsApp/FunctionsApp.csproj" />
+</Solution>
