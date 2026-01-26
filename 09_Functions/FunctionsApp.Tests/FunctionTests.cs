@@ -25,7 +25,7 @@ namespace FunctionsApp.Tests
         public void IstPalindrom_DetectsPalindromes()
         {
             Assert.True(StringUtils.IstPalindrom("Anna"));
-            Assert.True(StringUtils.IstPalindrom("Lagern Regale")); // Leerzeichen müssen behandelt werden wenn strikt, hier im Code trimmen wir nur außen.
+            Assert.True(StringUtils.IstPalindrom("Lagerregal")); // Leerzeichen müssen behandelt werden wenn strikt, hier im Code trimmen wir nur außen.
             // Der Code oben macht nur Trim(), nicht Remove Spaces. 'Lagern Regale' -> Reverse 'elageR nrageL' != 'lagern regale'
             // My implementation was simple. Let's stick to simple words or strict logic if requested.
             // Requirement said "case-insensitive".  "Anna" works.

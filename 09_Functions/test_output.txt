@@ -1,0 +1,20 @@
+  Wiederherzustellende Projekte werden ermittelt...
+  Alle Projekte sind für die Wiederherstellung auf dem neuesten Stand.
+  FunctionsApp -> D:\DEV\C-Sharp-OOP-Fundamentals\09_Functions\FunctionsApp\bin\Debug\net10.0\FunctionsApp.dll
+  FunctionsApp.Tests -> D:\DEV\C-Sharp-OOP-Fundamentals\09_Functions\FunctionsApp.Tests\bin\Debug\net10.0\FunctionsApp.Tests.dll
+Testlauf für "D:\DEV\C-Sharp-OOP-Fundamentals\09_Functions\FunctionsApp.Tests\bin\Debug\net10.0\FunctionsApp.Tests.dll" (.NETCoreApp,Version=v10.0)
+VSTest-Version 18.0.1 (x64)
+
+Die Testausführung wird gestartet, bitte warten...
+Insgesamt 1 Testdateien stimmten mit dem angegebenen Muster überein.
+  Fehler FunctionsApp.Tests.FunctionTests.IstPalindrom_DetectsPalindromes [2 ms]
+  Fehlermeldung:
+   Assert.True() Failure
+Expected: True
+Actual:   False
+  Stapelverfolgung:
+     at FunctionsApp.Tests.FunctionTests.IstPalindrom_DetectsPalindromes() in D:\DEV\C-Sharp-OOP-Fundamentals\09_Functions\FunctionsApp.Tests\FunctionTests.cs:line 28
+   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+
+Fehler!      : Fehler:     1, erfolgreich:     5, übersprungen:     0, gesamt:     6, Dauer: 25 ms - FunctionsApp.Tests.dll (net10.0)
