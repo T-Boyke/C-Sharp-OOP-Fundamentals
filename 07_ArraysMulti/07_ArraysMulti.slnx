@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="ArraysMultiApp.Tests/ArraysMultiApp.Tests.csproj" />
+  <Project Path="ArraysMultiApp/ArraysMultiApp.csproj" />
+</Solution>
