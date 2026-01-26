@@ -85,7 +85,8 @@ Dieses Repository ist chronologisch und thematisch strukturiert. Jede Unit enth�
 | [12](./12_Relationships) | **Beziehungen** | Assoziation, Aggregation, Komposition | ✅ |
 | [13](./13_Inheritance) | **Vererbung** | `base`, `virtual`, `override` | ✅ |
 | [14](./14_AbstractClasses) | **Abstrakte Klassen** | Abstraktion, Polymorphie | ✅ |
-| [15](./15_Interfaces) | **Interfaces** | Contracts, Dependency Injection | 🚧 |
+| [15](./15_Klausur) | **Klausur (Probe)** | Observer Pattern, OOP Review | ✅ |
+| [15](./15_Interfaces) | **Interfaces** | Contracts, Dependency Injection | ✅ |
 | **Phase 3** | **Advanced C#** | | |
 | [16](./16_StaticMembers) | **Static Members** | Singleton Pattern, Helpers | 🚧 |
 | [17](./17_DelegatesEvents) | **Delegates & Events** | Observer Pattern, Lambdas | 🚧 |
