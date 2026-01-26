@@ -71,7 +71,7 @@ Dieses Repository ist chronologisch und thematisch strukturiert. Jede Unit enth�
 | :--- | :--- | :--- | :--- |
 | **Phase 1** | **Foundation** | | |
 | [01](./01_Intro) | **Einführung** | Setup, Hello World, Console | ✅ |
-| [02](./02_Basics) | **Grundlagen** | Variablen, Datentypen, Operatoren | 🚧 |
+| [02](./02_Basics) | **Grundlagen** | Variablen, Datentypen, Operatoren | ✅ |
 | [03](./03_ControlFlow) | **Kontrollstrukturen** | If, Switch, Loops | 🚧 |
 | [04](./04_Methods) | **Methoden** | Parameter, Return, Call Stack | 🚧 |
 | [05](./05_Strings) | **Strings & Memory** | Heap vs Stack, String Manipulation | 🚧 |
