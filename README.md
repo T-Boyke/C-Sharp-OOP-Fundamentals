@@ -78,7 +78,7 @@ Dieses Repository ist chronologisch und thematisch strukturiert. Jede Unit enth�
 | **Phase 2** | **Object Oriented Programming** | | |
 | [06](./06_Arrays) | **Arrays** | 1D Arrays, Iteration, Algorithmen | ✅ |
 | [07](./07_ArraysMulti) | **Multidimensionale Arrays** | 2D/3D Arrays, Matrix-Operationen | ✅ |
-| [08](./08_Procedures) | **Prozeduren** | Void Methoden, Side-Effects | 🚧 |
+| [08](./08_Procedures) | **Prozeduren** | Void Methoden, Side-Effects | ✅ |
 | [09](./09_Functions) | **Funktionen** | Return Values, Pure Functions | 🚧 |
 | [10](./10_Classes) | **Klassen & Objekte** | Instanziierung, Kapselung | 🚧 |
 | [11](./11_ValueReferences) | **Werte- vs. Referenztypen** | Copy by Value/Reference | 🚧 |

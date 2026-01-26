@@ -1,93 +1,62 @@
-# 08_Procedures: Unterprogramme & Clean Code
+[⬅️ Zurück zum Hauptverzeichnis](../README.md)
 
-## 📚 Theorie
+# 08 - Prozeduren (Void Methoden)
 
-### 1. Was ist eine Prozedur?
-In der Theorie unterscheidet man oft:
-*   **Funktion**: Berechnet etwas und gibt ein Ergebnis zurück (`return ...`).
-*   **Prozedur**: Führt eine Aktion aus (z.B. Drucken, Speichern) und gibt **nichts** zurück (`void`).
+## 💡 Theorie
+Prozeduren sind Methoden ohne Rückgabewert (`void`). Sie führen Befehle aus (Side-Effects).
+Das macht sie schwerer zu testen, da sie kein Ergebnis `return`-en, sondern z.B. nur auf die Konsole schreiben.
 
-In C# nennen wir beides **Methoden**, aber der Begriff "Prozedur" deutet meist auf `void` hin.
-
+### Dependency Injection (Testbarkeit)
+Um `Console.WriteLine` testbar zu machen, nutzen wir ein Interface:
 ```csharp
-// Prozedur (void)
-public void DruckeDatum() {
-    Console.WriteLine(DateTime.Now);
-}
+public interface IOutputService { void WriteLine(string s); }
 
-// Funktion (return type)
-public string GetDatum() {
-    return DateTime.Now.ToString();
+// Im Code nutzen wir NUR das Interface:
+class MyService(IOutputService output) {
+    public void DoWork() => output.WriteLine("Work Done");
 }
 ```
-
-### 2. Parameterübergabe
-Methoden können Eingaben (Parameter) erhalten.
-*   **Pass-by-Value (Standard)**: Der *Wert* wird kopiert. Änderungen in der Methode ändern das Original nicht.
-*   **Best Practice**: Parameter sollten sprechende Namen haben (z.B. `anzahlWiederholungen` statt `i`).
-
-### 3. Testbarkeit & Clean Code (TDD)
-Ein großes Problem bei Prozeduren, die `Console.WriteLine` benutzen, ist das Testen.
-Wie überprüft ein automatischer Test, ob "Hallo" auf den schwarzen Bildschirm geschrieben wurde?
-
-**Lösung: Dependency Injection & Interfaces**
-Statt direkt `Console` zu rufen, nutzen wir einen Zwischenhändler (Interface `IConsoleService`).
-
-1.  **Im echten Programm**: Der Service schreibt wirklich auf die Konsole.
-2.  **Im Test**: Der Service schreibt in eine Liste (`Mock`), die wir prüfen können.
-
-> [!IMPORTANT]
-> Das ist das Prinzip der **Separation of Concerns (SoC)**. Unsere Logik weiß nicht, *wohin* sie schreibt, nur *dass* sie schreibt.
-
----
+So können wir im Test das "Schreiben" abfangen und prüfen!
 
 ## 📝 Aufgabenstellung
-> [!NOTE]
-> Quelle: `08 Aufgaben Unterprogramme Prozeduren.pdf` (Tom Selig, BITLC)
+Implementieren Sie diverse Prozeduren (siehe Source):
+1.  `AusgabeGutenMorgen()`
+2.  `AusgabeText(string text)`
+3.  `Addition(int a, int b)`
+4.  `AusgabeText(string text, int anzahl)`
+5.  `Prozedur1` -> `Prozedur2` -> `Prozedur3` (Verkettung)
+6.  `Taschenrechner` (Add, Sub, Mul, Div) mit Fehlerbehandlung für Div/0.
+7.  `ArrayAusgabe(int[,] matrix)`
+8.  `AnzeigeTeiler(int zahl)`
 
-### Aufgabe 1: Ausgabe1
-Schreiben Sie ein Programm, das eine Prozedur `AusgabeGutenMorgen()` enthält. Die Prozedur soll beim Aufruf immer den Text „Guten Morgen!“ auf der Konsole ausgeben.
-
-### Aufgabe 2: Ausgabe2
-Schreiben Sie ein Programm, das eine Prozedur `AusgabeText()` enthält. Die Prozedur soll einen Parameter text vom Typ string haben.
-
-### Aufgabe 3: Ausgabe3
-Schreiben Sie ein Programm, das eine Prozedur `AusgabeText()` enthält. Der Benutzer soll diesmal im Hauptprogramm einen Text eingeben, und die Prozedur gibt diesen Text bei Aufruf wieder auf der Konsole aus.
-
-### Aufgabe 4: Addition1
-Schreiben Sie ein Programm, das eine Prozedur `Addition()` enthält. Die Prozedur soll zwei Parameter zahl1 und zahl2 vom Typ int haben.
-
-### Aufgabe 5: Mehrfache Ausgabe
-Schreiben Sie ein Programm, das eine Prozedur `AusgabeText()` enthält. Die Prozedur hat einen Parameter text vom Typ string und einen weiteren Parameter anzahl vom Typ int.
-
-### Aufgabe 6: Prozeduren-Verkettung
-Schreiben Sie ein Programm, das die drei Prozeduren `Prozedur1()`, `Prozedur2()` und `Prozedur3()` enthält.
-
-### Aufgabe 7: Taschenrechner
-Schreiben Sie ein Programm, das einen simplen Taschenrechner simuliert. Im Programm gibt es die vier Prozeduren `Addition()`, `Subtraktion()`, `Multiplikation()` und `Division()`.
-
-### Aufgabe 8: Array-Ausgabe
-Schreiben Sie ein Programm, das eine Prozedur `ArrayAusgabe()` enthält. Die Prozedur hat einen Parameter array vom Typ `int[,]`.
-
-### Aufgabe 9: Teiler
-Schreiben Sie ein Programm, das eine Prozedur `AnzeigeTeiler()` enthält. Die Prozedur hat einen Parameter zahl vom Typ int.
-
----
-
-## 📐 UML-Klassendiagramm
+## 🧩 UML Klassendiagramm
 
 ```mermaid
 classDiagram
-    class IConsoleService {
+    class IOutputService {
         <<interface>>
-        +WriteLine(string msg) void
+        +WriteLine(string msg)
+        +Write(string msg)
     }
 
-    class ProcedureService {
-        -IConsoleService _console
-        +AusgabeGutenMorgen() void
-        +Addition(int a, int b) void
+    class ConsoleOutputService {
+        +WriteLine(string msg)
+        +Write(string msg)
     }
 
-    ProcedureService --> IConsoleService : nutzt
+    class ProcedureContainer {
+        -IOutputService _output
+        +AusgabeGutenMorgen()
+        +Addition(int a, int b)
+        +Division(double a, double b)
+        +AnzeigeTeiler(int zahl)
+    }
+
+    IOutputService <|.. ConsoleOutputService : implements
+    ProcedureContainer o-- IOutputService : injects
 ```
+
+## ✅ Definition of Done
+- [ ] Alle Ausgaben laufen über `IOutputService`.
+- [ ] Unit Tests nutzen einen `MockOutputService`.
+- [ ] Division durch Null fängt Fehler ab.
