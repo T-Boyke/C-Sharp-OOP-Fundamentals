@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="MethodPlayground.Tests/MethodPlayground.Tests.csproj" />
+  <Project Path="MethodPlayground/MethodPlayground.csproj" />
+</Solution>
