@@ -89,7 +89,7 @@ Dieses Repository ist chronologisch und thematisch strukturiert. Jede Unit enth�
 | [15](./15_Interfaces) | **Interfaces** | Contracts, Dependency Injection | ✅ |
 | **Phase 3** | **Advanced C#** | | |
 | [16](./16_StaticMembers) | **Static Members** | Singleton Pattern, Helpers | ✅ |
-| [17](./17_DelegatesEvents) | **Delegates & Events** | Observer Pattern, Lambdas | 🚧 |
+| [17](./17_DelegatesEvents) | **Delegates & Events** | Observer Pattern, Lambdas | ✅ |
 | [18](./18_Algorithms) | **Algorithmen** | Sort, Search, Complexity (Big O) | 🚧 |
 | [19](./19_Collections) | **Generic Collections** | List, Dictionary, HashSet | 🚧 |
 | [20](./20_EventsExceptions) | **Exception Handling** | Try-Catch-Finally, Custom Exceptions | 🚧 |

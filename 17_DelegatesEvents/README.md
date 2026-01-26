@@ -1,50 +1,53 @@
-# 17_DelegatesEvents: Delegates & Events
+[⬅️ Zurück zum Hauptverzeichnis](../README.md)
 
-## 📚 Theorie
+# 17 - Delegates & Events
 
-### 1. Delegates
-Ein Delegate ist ein Datentyp, der eine **Referenz auf eine Methode** speichert. Es ist wie ein "Funktionszeiger".
-*   Ermöglicht es, Methoden als Parameter zu übergeben.
-*   Basis für Events und LINQ.
+## 💡 Theorie
+Delegates sind **Methoden-Zeiger**. Sie erlauben es, Code in Variablen zu speichern und herumzureichen.
 
+### 1. Delegate (Typ)
 ```csharp
-public delegate void MyDelegate(string msg);
-MyDelegate del = Console.WriteLine;
-del("Hallo!"); // Ruft Console.WriteLine("Hallo!") auf
+public delegate void MeinDelegate(string s);
+MeinDelegate d = Console.WriteLine;
+d("Hallo");
 ```
 
-### 2. Events
-Ein Event ist ein spezieller Delegate, der den **Beobachter-Entwurfsmuster** (Observer Pattern) in C# integriert.
-*   Andere Klassen können sich mit `+=` registrieren (abonnieren).
-*   Das Objekt, das das Event besitzt, kann es auslösen (feuern).
+### 2. Event (Mechanismus)
+Ein Event ist ein Delegate mit integriertem Schutz (Observer Pattern).
+- `+=`: Abonnieren
+- `-=`: De-Abonnieren
+- Nur der Besitzer darf es auslösen (`Invoke`).
 
-```csharp
-public event EventHandler MyEvent;
-```
-
----
+### 3. Action & Func
+Moderne C# Shortcuts für Delegates:
+- `Action<T>`: Methode mit Rückgabetyp `void`.
+- `Func<T, R>`: Methode mit Rückgabetyp `R`.
 
 ## 📝 Aufgabenstellung
-> [!NOTE]
-> Quelle: Legacy `Aufgabe_21_Delegate`, `Aufgabe_21_Delegates-Events`
+1.  **Clock**: Eine Uhr, die tickt (`OnTick`).
+2.  **Display**: Zeigt die Uhrzeit an, wenn es tickt.
 
-1.  **Delegate**: Einfache Demo, wie man Methoden zuweist und aufruft.
-2.  **Clock (Event)**: Eine Klasse, die jede Sekunde ein Event feuert (simuliert), und ein `Display`, das darauf reagiert.
-
----
-
-## 📐 UML-Klassendiagramm
+## 🧩 UML Klassendiagramm
 
 ```mermaid
 classDiagram
     class Clock {
         +event Action~DateTime~ OnTick
-        +void Run()
+        +Run(ticks)
     }
 
     class Display {
-        +void ShowTime(DateTime time)
+        +ShowTime(time)
     }
 
-    Clock ..> Display : notifies via Event
+    class Program {
+    }
+
+    Clock --> Action : uses
+    Program ..> Clock : subscribes Display
 ```
+
+## ✅ Definition of Done
+- [ ] `Clock` feuert Event `OnTick`.
+- [ ] `Display` reagiert darauf.
+- [ ] Tests prüfen, ob das Event wirklich ausgelöst wird.
