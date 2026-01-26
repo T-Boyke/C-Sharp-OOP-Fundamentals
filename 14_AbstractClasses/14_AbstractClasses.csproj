@@ -8,4 +8,10 @@
     <LangVersion>14.0</LangVersion>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="14_AbstractClasses.Tests\**" />
+    <EmbeddedResource Remove="14_AbstractClasses.Tests\**" />
+    <None Remove="14_AbstractClasses.Tests\**" />
+  </ItemGroup>
+
 </Project>
