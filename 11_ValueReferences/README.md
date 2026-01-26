@@ -1,61 +1,52 @@
-# 11_ValueReferences: Wert- und Referenztypen
+[⬅️ Zurück zum Hauptverzeichnis](../README.md)
 
-## 📚 Theorie
+# 11 - Wert- und Referenztypen
 
-### 1. Der Speicher: Stack vs. Heap
-C# verwaltet Speicher in zwei Bereichen:
-*   **Stack (Stapel)**: Extrem schnell, klein, aufgeräumt. Hier leben einfache Variablen (`int`, `bool`, `double`) und Referenzen.
-*   **Heap (Haufen)**: Groß, chaotischer. Hier leben komplexe Objekte (`new Class()`, Arrays).
+## 💡 Theorie
+Das Verständnis von Speicher ist der Schlüssel zu C#.
+- **Stack**: Werte (`int`, `struct`). Kopie bei Zuweisung.
+- **Heap**: Objekte (`class`, `Array`). Adresse bei Zuweisung.
 
-### 2. Wertetypen (Value Types)
-*   Beispiele: `int`, `bool`, `double`, `struct`.
-*   Verhalten: Die Variable enthält den **Wert direkt**.
-*   Zuweisung: `a = b` kopiert den Wert. Änderungen an `a` ändern `b` nicht.
+### Wichtige Unterscheidung
+| Typ | Beispiel | Verhalten bei `a = b` |
+| --- | --- | --- |
+| **Value Type** | `int`, `bool`, `struct` | **Kopie**: Werte sind unabhängig. |
+| **Reference Type** | `class`, `string`, `Array` | **Referenz**: Beide zeigen auf dasselbe Haus. |
 
-### 3. Referenztypen (Reference Types)
-*   Beispiele: `string`, `class`, `int[]` (Arrays!).
-*   Verhalten: Die Variable enthält eine **Speicheradresse** (Referenz), die auf das Objekt im Heap zeigt.
-*   Zuweisung: `a = b` kopiert nur die Adresse. Beide zeigen auf **dasselbe Objekt**. Änderungen an `a` ändern auch `b`!
+### Das `ref` Keyword
+Mit `ref` können wir erzwingen, dass eine Variable "By Reference" übergeben wird. Die Methode arbeitet dann direkt mit dem Original des Aufrufers.
 
-### 4. `ref` Keyword
-Mit `ref` kann man erzwingen, dass auch Wertetypen als Referenz übergeben werden.
-
----
-
-## 🔬 Experimente
-> [!NOTE]
-> Quelle: `03 C# - Wert- und Referenztypen - 202512.pdf` (Tom Selig, BITLC)
-
-### Experiment 1: Wertetyp Kopie
-Zeigen Sie, dass bei `int` eine Kopie erstellt wird.
 ```csharp
-int a = 5;
-int b = a;
-b = 10;
-// a ist immer noch 5
+void Manipulate(ref int x) { x = 0; }
 ```
 
-### Experiment 2: Referenztyp (Array)
-Zeigen Sie, dass bei Arrays beide Variablen auf dasselbe Array zeigen.
-```csharp
-int[] a = { 1 };
-int[] b = a;
-b[0] = 99;
-// a[0] ist jetzt auch 99!
-```
+## 📝 Aufgabenstellung
+Experimentieren Sie mit dem Speicher:
+1.  Ändern Sie ein `int` in einer Methode -> Original bleibt gleich.
+2.  Ändern Sie ein `int` mit `ref` -> Original ändert sich.
+3.  Ändern Sie den Inhalt eines Arrays (`class`) -> Original ändert sich.
+4.  Versuchen Sie, ein Objekt neu zuzuweisen (`person = new ...`) -> Ohne `ref` passiert nichts beim Aufrufer!
 
-### Experiment 3: `ref` Parameter
-Schreiben Sie eine Methode `Swap(ref int a, ref int b)`, die zwei Zahlen wirklich tauscht (nicht nur lokal).
-
----
-
-## 📐 UML-Klassendiagramm
+## 🧩 UML Klassendiagramm
 
 ```mermaid
 classDiagram
-    class ExperimentService {
-        +void ModifyValue(int val)
-        +void ModifyReference(int[] arr)
-        +void ModifyValueRef(ref int val)
+    class MemoryExperiment {
+        +ModifyValue(int val)
+        +ModifyValueRef(ref int val)
+        +ModifyReferenceContent(int[] arr)
+        +ReassignReference(Person p)
+        +ReassignReferenceRef(ref Person p)
     }
+
+    class Person {
+        +string Name
+    }
+
+    MemoryExperiment ..> Person : uses
 ```
+
+## ✅ Definition of Done
+- [ ] Unterschied zwischen `ModifyValue` und `ModifyReference` verstanden.
+- [ ] Tests beweisen, dass Arrays Referenztypen sind.
+- [ ] Tests beweisen, dass `int` Wertetypen sind.

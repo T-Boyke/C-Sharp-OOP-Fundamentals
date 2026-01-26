@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="ValueReferencesApp.Tests/ValueReferencesApp.Tests.csproj" />
+  <Project Path="ValueReferencesApp/ValueReferencesApp.csproj" />
+</Solution>

@@ -81,7 +81,7 @@ Dieses Repository ist chronologisch und thematisch strukturiert. Jede Unit enth�
 | [08](./08_Procedures) | **Prozeduren** | Void Methoden, Side-Effects | ✅ |
 | [09](./09_Functions) | **Funktionen** | Return Values, Pure Functions | ✅ |
 | [10](./10_Classes) | **Klassen & Objekte** | Instanziierung, Kapselung | ✅ |
-| [11](./11_ValueReferences) | **Werte- vs. Referenztypen** | Copy by Value/Reference | 🚧 |
+| [11](./11_ValueReferences) | **Werte- vs. Referenztypen** | Copy by Value/Reference | ✅ |
 | [12](./12_Relationships) | **Beziehungen** | Assoziation, Aggregation, Komposition | 🚧 |
 | [13](./13_Inheritance) | **Vererbung** | `base`, `virtual`, `override` | 🚧 |
 | [14](./14_AbstractClasses) | **Abstrakte Klassen** | Abstraktion, Polymorphie | 🚧 |
