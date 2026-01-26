@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="StaticApp.Tests/StaticApp.Tests.csproj" />
+  <Project Path="StaticApp/StaticApp.csproj" />
+</Solution>
