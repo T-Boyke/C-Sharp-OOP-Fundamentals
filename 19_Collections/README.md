@@ -1,46 +1,42 @@
-# 19_Collections: Generische Listen & Dictionaries
+[⬅️ Zurück zum Hauptverzeichnis](../README.md)
 
-## 📚 Theorie
+# 19 - Generische Listen & Dictionaries
 
-### 1. `List<T>`
-Eine dynamische Liste, die wächst und schrumpft.
-*   **Zugriff**: Per Index `liste[0]`.
-*   **Methoden**: `Add()`, `Remove()`, `Contains()`, `Sort()`.
-*   **Unterschied zu Array**: Arrays haben feste Größe, Listen sind dynamisch.
+## 💡 Theorie
+Die moderne Art, Daten zu speichern. Array war gestern.
+- **List<T>**: Dynamisches Array.
+- **Dictionary<K, V>**: Schnelle Suche per Schlüssel.
 
-### 2. `Dictionary<TKey, TValue>`
-Ein Speicher für Schlüssel-Wert-Paare (Key-Value-Pairs).
-*   **Zugriff**: Per Key `dict["MeinKey"]`.
-*   **Performance**: Sehr schnell (O(1)) beim Suchen nach Keys.
-*   **Beispiel**: Telefonbuch (Name -> Nummer), Hotelzimmer (ZimmerNr -> Gast).
+### Wichtige Methoden
+```csharp
+list.Add(item);
+list.Remove(item);
+var item = list[0];
 
-### 3. `Queue<T>` und `Stack<T>`
-*   **Queue (Warteschlange)**: FIFO (First In, First Out). Wer zuerst kommt, mahlt zuerst.
-*   **Stack (Stapel)**: LIFO (Last In, First Out). Das zuletzt aufgelegte Element wird als erstes wieder weggenommen.
-
----
+dict.Add("Key", "Value");
+if (dict.ContainsKey("Key")) { ... }
+var val = dict["Key"];
+```
 
 ## 📝 Aufgabenstellung
-> [!NOTE]
-> Quelle: `Aufgabe Hotel.pdf`
+**Hotel-Verwaltung**:
+Daten kommen als CSV (`"101;Single;Name;City"`) und sollen strukturiert werden.
+1.  **Parsing**: String zerlegen.
+2.  **Mapping**: Jeden Gast in ein `Dictionary` packen.
+3.  **Collection**: Alle Gäste in einer `List` speichern.
 
-Wir simulieren ein einfaches Hotel-Verwaltungssystem.
-Gegeben ist ein langer String mit Buchungsdaten: `15;D;Peter Schmidt;Wuppertal\n...`.
-
-**Aufgabe**:
-1.  Zerlegen Sie den String (Parsing).
-2.  Speichern Sie jeden Gast in einem `Dictionary<string, string>` (z.B. "Zimmer" -> "15").
-3.  Speichern Sie alle Gäste in einer `List<Dictionary<string, string>>`.
-4.  Geben Sie die Liste formatiert aus.
-
----
-
-## 📐 UML-Klassendiagramm
+## 🧩 UML Klassendiagramm
 
 ```mermaid
 classDiagram
     class HotelService {
-        +List~Dictionary~string, string~~ ParseBookingData(string rawData)
-        +void PrintBookings(List~Dictionary~string, string~~ bookings)
+        +ParseBookingData(csv) List~Dictionary~
+        +PrintBookings(list)
     }
 ```
+
+## ✅ Definition of Done
+- [ ] CSV-String wird korrekt in Objekte zerlegt.
+- [ ] `Dictionary` speichert Eigenschaften (Zimmer, Name, Stadt).
+- [ ] `List` hält alle Dictionary-Objekte.
+- [ ] Tests prüfen die Anzahl und Inhalte der Einträge.
