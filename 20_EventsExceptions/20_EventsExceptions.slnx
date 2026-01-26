@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="ExceptionApp.Tests/ExceptionApp.Tests.csproj" />
+  <Project Path="ExceptionApp/ExceptionApp.csproj" />
+</Solution>

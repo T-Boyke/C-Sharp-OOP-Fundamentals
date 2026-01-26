@@ -1,6 +1,6 @@
 using System;
 
-namespace _20_EventsExceptions.src
+namespace ExceptionApp
 {
     public class WaterLevelEventArgs : EventArgs
     {
