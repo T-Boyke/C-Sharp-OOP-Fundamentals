@@ -1,58 +1,31 @@
-# 13_Inheritance: Vererbung
+[⬅️ Zurück zum Hauptverzeichnis](../README.md)
 
-## 📚 Theorie
+# 13 - Vererbung (Inheritance)
 
-### 1. Vererbung (Inheritance)
-Eine der mächtigsten Eigenschaften der OOP. Eine Klasse (Subklasse) kann Eigenschaften und Methoden einer anderen Klasse (Basisklasse) erben.
-*   **Vorteil**: Wiederverwendung von Code (DRY - Don't Repeat Yourself).
-*   **Syntax**: `class Hund : Tier { ... }`
+## 💡 Theorie
+Vererbung erlaubt es, gemeinsame Logik in eine **Basisklasse** auszulagern (`BankAccount`) und spezifische Logik in **Subklassen** (`SavingsAccount`, `CheckingAccount`) zu implementieren.
 
-### 2. `protected`
-Ein Zugriffsmodifizierer zwischen `private` und `public`.
-*   `private`: Nur innerhalb der *eigenen* Klasse sichtbar.
-*   `protected`: Innerhalb der eigenen Klasse UND in allen *abgeleiteten* Klassen sichtbar.
-
-### 3. `base` Keyword
-*   Aufruf des Konstruktors der Basisklasse: `: base(parameter)`
-*   Zugriff auf Methoden der Basisklasse: `base.Method()`
-
-### 4. Typ-Prüfung und Casting
-*   `obj is Typ`: Prüft, ob ein Objekt von einem bestimmten Typ ist (oder davon erbt).
-*   `obj as Typ`: Versucht zu casten. Gibt `null` zurück, wenn es nicht klappt (statt Absturz).
-
----
+### Keywords
+- `virtual`: Erlaubt einer Methode, überschrieben zu werden.
+- `override`: Überschreibt eine virtuelle Methode.
+- `base`: Ruft die Basisklasse auf (z.B. Konstruktor).
+- `protected`: Sichtbar für Kinder, aber nicht für die Öffentlichkeit.
 
 ## 📝 Aufgabenstellung
-> [!NOTE]
-> Quelle: `08 Einführung in die OOP mit C# - Teil 3 - 202601.pdf` (Tom Selig, BITLC)
+Ein Bankensystem mit verschiedenen Kontotypen:
+1.  **BankAccount**: Kann einzahlen und abheben (Standard).
+2.  **SavingsAccount**: Zinsen anwenden.
+3.  **CheckingAccount**: Dispokredit nutzen (Überschreibt `Withdraw`).
 
-### Klassenhierarchie: BankAccount
-Wir implementieren das klassische Beispiel aus den Folien.
-
-**1. Basisklasse: `BankAccount`**
-*   Felder: `_balance` (decimal), `_accountId` (int).
-*   Methoden: `Deposit(amount)`, `Withdraw(amount)`.
-*   Besonderheit: `Deposit` ist für alle gleich.
-
-**2. Subklasse: `SavingsAccount` (Sparbuch)**
-*   Zusätzlich: `_interestRate` (Zinssatz).
-*   Methode: `ApplyInterest()` (Zinsen gutschreiben).
-
-**3. Subklasse: `CheckingAccount` (Girokonto)**
-*   Zusätzlich: `_overdraftLimit` (Dispo).
-*   Logik: Darf ins Minus gehen bis zum Limit.
-
----
-
-## 📐 UML-Klassendiagramm
+## 🧩 UML Klassendiagramm
 
 ```mermaid
 classDiagram
     class BankAccount {
         #decimal _balance
-        #int _accountId
-        +void Deposit(decimal amount)
-        +bool Withdraw(decimal amount)
+        +int AccountId
+        +void Deposit(amount)
+        +bool Withdraw(amount) virtual
     }
 
     class SavingsAccount {
@@ -62,9 +35,15 @@ classDiagram
 
     class CheckingAccount {
         -decimal _overdraftLimit
-        +bool Withdraw(decimal amount)
+        +bool Withdraw(amount) override
     }
 
     BankAccount <|-- SavingsAccount
     BankAccount <|-- CheckingAccount
 ```
+
+## ✅ Definition of Done
+- [ ] `BankAccount` definiert `virtual Withdraw`.
+- [ ] `CheckingAccount` nutzt `override Withdraw` für Dispo.
+- [ ] Konstruktoren nutzen `base(...)`.
+- [ ] Tests prüfen spezifisches Verhalten (Zinsen, Dispo-Limit).

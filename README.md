@@ -83,7 +83,7 @@ Dieses Repository ist chronologisch und thematisch strukturiert. Jede Unit enth�
 | [10](./10_Classes) | **Klassen & Objekte** | Instanziierung, Kapselung | ✅ |
 | [11](./11_ValueReferences) | **Werte- vs. Referenztypen** | Copy by Value/Reference | ✅ |
 | [12](./12_Relationships) | **Beziehungen** | Assoziation, Aggregation, Komposition | ✅ |
-| [13](./13_Inheritance) | **Vererbung** | `base`, `virtual`, `override` | 🚧 |
+| [13](./13_Inheritance) | **Vererbung** | `base`, `virtual`, `override` | ✅ |
 | [14](./14_AbstractClasses) | **Abstrakte Klassen** | Abstraktion, Polymorphie | 🚧 |
 | [15](./15_Interfaces) | **Interfaces** | Contracts, Dependency Injection | 🚧 |
 | **Phase 3** | **Advanced C#** | | |
