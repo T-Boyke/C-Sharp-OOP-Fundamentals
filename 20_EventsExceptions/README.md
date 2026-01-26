@@ -1,44 +1,38 @@
-# 20_EventsExceptions: Events & Exceptions
+[⬅️ Zurück zum Hauptverzeichnis](../README.md)
 
-## 📚 Theorie
+# 20 - Events & Exceptions
 
-### 1. Exceptions (Ausnahmen)
-Fehlerbehandlung zur Laufzeit.
-*   `try`: Block, in dem ein Fehler auftreten könnte.
-*   `catch`: Block, der den Fehler abfängt.
-*   `throw`: Wirft einen Fehler manuell.
-*   `finally`: Wird immer ausgeführt (z.B. zum Aufräumen).
+## 💡 Theorie
+Robuste Anwendungen brauchen Fehlerbehandlung und Kommunikation.
 
-### 2. Benutzerdefinierte Events
-Erweiterte Events mit `EventHandler<T>`.
-*   Ermöglicht das Übergeben von Daten (EventArgs) an den Empfänger.
-*   Standard-Pattern in .NET.
+### Exception Handling
+- `try-catch`: Fängt Fehler ab, damit die App nicht abstürzt.
+- `throw`: Signalisert, dass etwas schiefgelaufen ist (z.B. `OverflowException`).
+- `finally`: Wird immer ausgeführt (Aufräumen).
 
----
+### Custom Events (`EventHandler<T>`)
+Events erlauben Klassen, Nachrichten zu senden.
+1.  **EventArgs**: Container für Daten (`OldLevel`, `NewLevel`).
+2.  **Event**: Die "Glocke" (`public event EventHandler<MyArgs> Name`).
+3.  **Invoke**: Das Läuten (`Name?.Invoke(this, args)`).
 
 ## 📝 Aufgabenstellung
-> [!NOTE]
-> Quelle: `Aufgabe Wasserstand 1 & 2`
+**WaterTank Simulation**:
+- Tank hat Kapazität.
+- Beim Füllen (`AddWater`):
+    - Wenn voll -> `OverflowException`.
+    - Wenn Level ändert -> `LevelChanged` Event.
 
-Wir simulieren einen Wassertank (`WaterTank`).
-1.  Der Tank hat eine Kapazität und einen aktuellen Füllstand.
-2.  Methode `AddWater(int amount)`:
-    *   Fügt Wasser hinzu.
-    *   Wenn der Tank überläuft -> `OverflowException` werfen!
-    *   Wenn sich der Füllstand ändert -> `LevelChanged` Event feuern.
-3.  Das Event soll die alte und neue Füllmenge übermitteln (`WaterLevelEventArgs`).
-
----
-
-## 📐 UML-Klassendiagramm
+## 🧩 UML Klassendiagramm
 
 ```mermaid
 classDiagram
     class WaterTank {
         +int Capacity
         +int CurrentLevel
-        +event EventHandler~WaterLevelEventArgs~ LevelChanged
-        +void AddWater(int amount)
+        +event LevelChanged
+        +AddWater(amount)
+        #OnLevelChanged(args)
     }
 
     class WaterLevelEventArgs {
@@ -46,7 +40,11 @@ classDiagram
         +int NewLevel
     }
 
-    class OverflowException {
-        <<Exception>>
-    }
+    WaterTank ..> WaterLevelEventArgs : uses
+    WaterTank ..> OverflowException : throws
 ```
+
+## ✅ Definition of Done
+- [ ] `AddWater` wirft Fehler bei Überlauf.
+- [ ] `LevelChanged` feuert nur bei echter Änderung.
+- [ ] `try-catch` Block im Programm fängt den Fehler sauber ab.
