@@ -1,4 +1,4 @@
-namespace _14_AbstractClasses.src.Interfaces
+namespace AbstractApp.Interfaces
 {
     public interface ILogable
     {
