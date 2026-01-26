@@ -23,7 +23,17 @@ namespace FunctionsApp.Services
         {
             if (string.IsNullOrWhiteSpace(text)) return false;
 
-            string clean = text.ToLower().Trim();
+            // Nur Buchstaben betrachten, alles andere entfernen
+            var sb = new System.Text.StringBuilder();
+            foreach (char c in text)
+            {
+                if (char.IsLetterOrDigit(c))
+                {
+                    sb.Append(char.ToLower(c));
+                }
+            }
+            
+            string clean = sb.ToString();
             string reversed = Reverse(clean);
             return clean == reversed;
         }
