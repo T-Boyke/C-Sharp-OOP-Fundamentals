@@ -1,19 +1,16 @@
-using System;
+namespace _06_Arrays.src;
 
-namespace _06_Arrays.src
+/// <summary>
+/// Einstiegspunkt der Anwendung.
+/// </summary>
+class Program
 {
     /// <summary>
-    /// Einstiegspunkt der Anwendung.
+    /// Main-Methode, initialisiert die UI.
     /// </summary>
-    class Program
+    static void Main(string[] args)
     {
-        /// <summary>
-        /// Main-Methode, initialisiert die UI.
-        /// </summary>
-        static void Main(string[] args)
-        {
-            var ui = new ConsoleUI();
-            ui.Run();
-        }
+        var ui = new ConsoleUI();
+        ui.Run();
     }
 }

@@ -1,3 +1,5 @@
+[⬅️ Zurück zum Hauptverzeichnis](../README.md)
+
 # 06_Arrays: Arrays, Listen und Algorithmen
 
 ## 📚 Theorie: Arrays in C#

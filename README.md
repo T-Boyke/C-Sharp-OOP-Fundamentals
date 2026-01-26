@@ -1,89 +1,93 @@
-# C-Sharp-OOP-and-UML-Fundamentals
+# C# OOP Fundamentals (2026 Edition)
 
-![.NET 10](https://img.shields.io/badge/.NET-10.0-512BD4?style=for-the-badge&logo=dotnet&logoColor=white)
-![C# 14](https://img.shields.io/badge/C%23-14.0-239120?style=for-the-badge&logo=csharp&logoColor=white)
-![LTS](https://img.shields.io/badge/Support-LTS-blue?style=for-the-badge)
-![License MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)
-![TDD Optimized](https://img.shields.io/badge/TDD-Optimized-green?style=for-the-badge)
+![.NET 10](https://img.shields.io/badge/.NET-10.0-512BD4?style=for-the-badge&logo=dotnet)
+![C# 14](https://img.shields.io/badge/C%23-14.0-239120?style=for-the-badge&logo=csharp)
+![LTS](https://img.shields.io/badge/Status-LTS-blue?style=for-the-badge)
+![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
+![TDD](https://img.shields.io/badge/Methodology-TDD_Optimized-orange?style=for-the-badge)
 
-Professional C# learning repository focusing on Clean Code, TDD, and IHK-compliant documentation.
-
-## 📋 Inhaltsverzeichnis (TOC)
-- [Einrichtung 2026](#einrichtung-2026)
-- [Best Practices & Features](#best-practices--features)
-- [Methodik (TDD & SFC)](#methodik-tdd--sfc)
-- [Lerneinheiten](#lerneinheiten)
+Professional C# training repository focusing on **Clean Code**, **TDD**, and **IHK Standards**. 
+Updated for **January 2026** technology stack.
 
 ---
 
-## Einrichtung 2026
-
-### 🛠️ Entwicklungsumgebung (IDE)
-
-#### Visual Studio 2026 Community
-1.  **Download**: Laden Sie den Installer von der offiziellen Microsoft-Seite.
-2.  **Workloads**: Wählen Sie bei der Installation:
-    *   `.NET Desktop Development`
-    *   `.NET 10 SDK`
-3.  **Extensions**: Installieren Sie *GitHub Copilot Chat NEXT* und *Roslyn Analyzers*.
-
-#### JetBrains Rider 2026 (Education Pack)
-1.  **Installation**: Nutzen Sie die JetBrains Toolbox App.
-2.  **Konfiguration**: Stellen Sie sicher, dass das .NET 10 SDK erkannt wird (`Settings > Build, Execution, Deployment > Toolset and Build`).
-3.  **Plugins**:
-    *   *ReSharper 2026.1* (integriert)
-    *   *SonarLint*
-
-### 📦 .NET 10 SDK
-Stellen Sie sicher, dass die Version `10.0.x` installiert ist.
-```bash
-dotnet --version
-```
+## 📋 Table of Contents
+- [1. Environment Setup (2026)](#1-environment-setup-2026)
+- [2. Best Practices](#2-best-practices)
+    - [C# 14 Features](#c-14-features)
+    - [Git Workflow](#git-workflow)
+    - [Methodology (TDD & SFC)](#methodology-tdd--sfc)
+- [3. Repository Structure](#3-repository-structure)
 
 ---
 
-## Best Practices & Features
+## 1. Environment Setup (2026)
 
-### 🚀 C# 14 Highlights
-Wir setzen konsequent auf moderne Sprachfeatures:
+### IDE Installation
+This repository is optimized for the following environments. Ensure you have the "Education Pack" or Community editions for learning purposes.
 
-*   **Primary Constructors**: Für prägnante Klassendefinitionen.
-    ```csharp
-    public class Person(string name, int age);
+#### 🟦 Visual Studio 2026 Community
+1.  Download the **Visual Studio 2026 Installer**.
+2.  Select workload: **ASP.NET and web development** and **.NET desktop development**.
+3.  Ensure **.NET 10 Runtime (Preview/RC)** is checked in Individual Components.
+
+#### 🟥 JetBrains Rider 2026
+1.  Install via **JetBrains Toolbox**.
+2.  Apply for the **Free Educational License** if eligible.
+3.  Ensure the "Cognitive Complexity" plugin is enabled for clean code analysis.
+
+### SDK & Tools
+-   **SDK**: Install [.NET 10.0 SDK](https://dotnet.microsoft.com/download) (Version 10.0.100 or higher).
+-   **Global Tools**:
+    ```powershell
+    dotnet tool install --global dotnet-reportgenerator-globaltool
     ```
-*   **Enhanced Collection Expressions**:
-    ```csharp
-    int[] numbers = [1, 2, 3, 4];
-    ```
-*   **Lambda Default Parameters**:
-    ```csharp
-    var greet = (string name = "Welt") => $"Hallo {name}!";
-    ```
-*   **Field Keywords**: Automatische Properties mit Validierung (Preview Feature).
 
-### 🐙 GitHub Workflow
-*   **Branching**: GitFlow (main, develop, feature branches).
-*   **Commits**: [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) (z.B. `feat: add array statistics logic`).
-*   **Issues**: Nutzen Sie die bereitgestellten Templates für Bugs und Features.
+### Recommended Plugins
+-   **GitHub Copilot Chat NEXT**: For AI-assisted refactoring.
+-   **ReSharper 2026.1**: Enhanced static analysis.
+-   **SonarLint**: Real-time code quality checks.
+-   **Roslyn Analyzers**: Enforce formatting rules (`.editorconfig`).
 
 ---
 
-## Methodik (TDD & SFC)
+## 2. Best Practices
 
-### 🔴🟢🔵 Red-Green-Refactor
-1.  **Red**: Schreiben Sie einen fehlschlagenden Test, der die Anforderung beschreibt.
-2.  **Green**: Implementieren Sie den minimal notwendigen Code, um den Test zu bestehen.
-3.  **Refactor**: Optimieren Sie den Code (Clean Code), ohne die Funktionalität zu ändern.
+### C# 14 Features
+We actively utilize modern C# 14 capabilities to reduce boilerplate:
+-   **Primary Constructors**: `public class User(string name) { ... }`
+-   **Field Keywords**: Use `field` keyword in properties to avoid explicit backing fields.
+-   **Enhanced Collection Expressions**: `List<int> numbers = [1, 2, 3];`
+-   **Lambda Default Parameters**: `(int x = 0) => x + 1`
 
-### 🧩 Separation of Concerns (SFC)
-*   **Logic**: Reine C#-Logik in Services/Klassen (testbar).
-*   **UI**: Konsolenausgaben nur in `Program.cs` oder dedizierten UI-Klassen.
-*   **Data**: Datenhaltung getrennt von der Verarbeitung.
+### Git Workflow
+-   **Branching**: Follows simplified GitFlow. Feature branches named `feature/topic-name`.
+-   **Commits**: Use [Conventional Commits](https://www.conventionalcommits.org/):
+    -   `feat: add array sorting algorithm`
+    -   `fix: resolve null reference in user service`
+    -   `docs: update diagram for inheritance`
+-   **Issues**: All changes must be linked to an Issue.
+
+### Methodology (TDD & SFC)
+-   **TDD (Red-Green-Refactor)**:
+    1.  🔴 Write a failing test.
+    2.  🟢 Write minimal code to pass.
+    3.  🔵 Refactor for Clean Code (SOLID).
+-   **SFC (Separation of Concerns)**: Logic, UI (Console), and Data must be strictly separated.
 
 ---
 
-## Lerneinheiten
+## 3. Repository Structure
 
-| Einheit | Thema | Status |
+The repository is organized into Learning Units. Each unit contains:
+-   **Theory**: Detailed `README.md` with IHK-compliant explanations.
+-   **UML**: Mermaid diagrams (Class & Sequence).
+-   **Code**: .NET 10 Projects with extreme documentation (`<summary>`, `<example>`, etc.).
+
+| Unit | Topic | Status |
 | :--- | :--- | :--- |
-| [06_Arrays](./06_Arrays) | Arrays, Statistik, Algorithmen | 🚧 In Arbeit |
+| `06` | Arrays & Basic Data Structures | 🚧 Refactoring |
+| ... | ... | ... |
+
+---
+*© 2026 - T-Boyke. Generated by Gemini (Senior C# Architect)*
