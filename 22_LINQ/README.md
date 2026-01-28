@@ -63,10 +63,3 @@ Ausführen der Unit-Tests:
 dotnet test
 
 ```
-
-
-### Nächste Schritte
-* Ersetze den Inhalt der `README.md` im Ordner `22_LINQ` mit dem obigen Text.
-* Stelle sicher, dass die Projektdatei (`.csproj`) und die Ordnerstruktur (Services-Ordner) dem neuen Stand entsprechen.
-
-```
