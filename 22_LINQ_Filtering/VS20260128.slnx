@@ -1,4 +1,9 @@
 <Solution>
-  <Project Path="AnonymeTypen/AnonymeTypen.csproj" />
-  <Project Path="LINQ01/LINQ01.csproj" />
+  ...
+  <Project Path="21_ExtensionMethods/ExtensionMethodsApp/ExtensionMethodsApp.csproj" />
+  <Project Path="21_ExtensionMethods/ExtensionMethods.Tests/ExtensionMethods.Tests.csproj" />
+  
+  <Project Path="22_LINQ_Filtering/LinqFilteringApp/LinqFilteringApp.csproj" />
+  <Project Path="22_LINQ_Filtering/LinqFiltering.Tests/LinqFiltering.Tests.csproj" />
+  ...
 </Solution>
