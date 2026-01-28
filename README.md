@@ -94,7 +94,7 @@ Dieses Repository ist chronologisch und thematisch strukturiert. Jede Unit enth�
 | [19](./19_Collections) | **Generic Collections** | List, Dictionary, HashSet | ✅ |
 | [20](./20_EventsExceptions) | **Exception Handling** | Try-Catch-Finally, Custom Exceptions | ✅ |
 | [21](./21_ExtensionMethods) | **Extension Methods** | Erweiterung von String, Int und Interfaces | 🚧 |
-
+| [22](./22_LINQ_Filtering) | **LINQ Filtering** | Datenabfrage mit Method- & Query-Syntax | 🚧 |
 ---
 
 ## 🛠 Best Practices & Standards
@@ -183,6 +183,8 @@ Das Repository wurde um das Modul 21 erweitert. Dieses beinhaltet:
 * **String-Erweiterungen**: Implementierung von Hilfsmethoden wie `.Left()`, `.Right()` und `.IsPalindrome()`.
 * **Integer-Validierung**: Statische Erweiterungen für `.IsEven()` und `.IsOdd()` zur Prüfung von Zahlenwerten.
 * **Best Practices**: Alle Methoden sind mit XML-Tags dokumentiert und durch Unit-Tests abgesichert.
+Das Repository wurde um LINQ-Grundlagen erweitert:
+* **Modul 22**: Einführung in LINQ (Language Integrated Query) mit Fokus auf Filteroperationen (`Where`) unter Verwendung von Extension-Method-Syntax und Query-Expression-Syntax.
 
 ## Projekt-Struktur
 Jedes Modul enthält:
