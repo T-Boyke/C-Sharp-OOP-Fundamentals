@@ -1,139 +1,67 @@
-using System.Collections.Generic;
-using System.Linq;
+using LinqConsoleApp.Services;
+using Xunit;
 
-namespace LinqConsoleApp.Services
+namespace LinqConsoleApp.Tests
 {
     /// <summary>
-    /// Stellt Funktionen zur Aggregation (Berechnung von Kennzahlen) bereit.
-    /// Beinhaltet Summen-, Durchschnitts-, Minimum- und Maximum-Berechnungen.
+    /// Testklasse für die Aggregations-Methoden (Sum, Min, Max, Average, Count).
     /// </summary>
-    public class AggregationService
+    public class AggregationTests
     {
-        // Datenbasis aus Aufgabe Aggregation
-        private readonly int[] _numbers = { 5, 4, 1, 3, 9, 8, 6, 7, 2, 0, 22, 12, 16, 18, 11, 19, 13 };
+        private readonly AggregationService _service;
+        private readonly int[] _data;
 
-        /// <summary>
-        /// Gibt die Datenbasis zurück.
-        /// </summary>
-        /// <returns>Array mit Ganzzahlen.</returns>
-        public int[] GetNumbers() => _numbers;
-
-        // --- a. Summe aller Werte ---
-
-        /// <summary>
-        /// Berechnet die Summe aller Elemente im Array.
-        /// </summary>
-        /// <param name="input">Eingabe-Array.</param>
-        /// <returns>Die Summe als Integer.</returns>
-        public int GetSum(int[] input)
+        public AggregationTests()
         {
-            // Sum() addiert alle Elemente auf.
-            return input.Sum();
+            _service = new AggregationService();
+            _data = _service.GetNumbers();
+            // Daten: { 5, 4, 1, 3, 9, 8, 6, 7, 2, 0, 22, 12, 16, 18, 11, 19, 13 }
         }
 
-        // --- b. Die kleinste Zahl ---
-
-        /// <summary>
-        /// Ermittelt den kleinsten Wert im Array.
-        /// </summary>
-        /// <param name="input">Eingabe-Array.</param>
-        /// <returns>Der kleinste Wert.</returns>
-        public int GetMin(int[] input)
+        [Fact]
+        public void GetSum_ShouldCalculateTotalSum()
         {
-            // Min() sucht das Element mit dem geringsten Wert.
-            return input.Min();
+            // Manuelle Rechnung: 156
+            var result = _service.GetSum(_data);
+            Assert.Equal(156, result);
         }
 
-        // --- c. Die größte Zahl ---
-
-        /// <summary>
-        /// Ermittelt den größten Wert im Array.
-        /// </summary>
-        /// <param name="input">Eingabe-Array.</param>
-        /// <returns>Der größte Wert.</returns>
-        public int GetMax(int[] input)
+        [Fact]
+        public void GetMin_ShouldReturnSmallestNumber()
         {
-            // Max() sucht das Element mit dem höchsten Wert.
-            return input.Max();
+            var result = _service.GetMin(_data);
+            Assert.Equal(0, result);
         }
 
-        // --- d. Der Durchschnittswert ---
-
-        /// <summary>
-        /// Berechnet den arithmetischen Mittelwert.
-        /// </summary>
-        /// <param name="input">Eingabe-Array.</param>
-        /// <returns>Der Durchschnitt als Double.</returns>
-        public double GetAverage(int[] input)
+        [Fact]
+        public void GetMax_ShouldReturnLargestNumber()
         {
-            // Average() berechnet den Durchschnitt. Rückgabetyp ist bei int-Input immer double.
-            return input.Average();
+            var result = _service.GetMax(_data);
+            Assert.Equal(22, result);
         }
 
-        // --- e. Die kleinste gerade Zahl ---
-
-        /// <summary>
-        /// Filtert gerade Zahlen und gibt davon die kleinste zurück.
-        /// </summary>
-        /// <param name="input">Eingabe-Array.</param>
-        /// <returns>Die kleinste gerade Zahl.</returns>
-        public int GetMinEven(int[] input)
+        [Fact]
+        public void GetMinEven_ShouldReturnSmallestEvenNumber()
         {
-            // 1. Where: Filtert auf gerade Zahlen.
-            // 2. Min: Sucht im gefilterten Ergebnis das Minimum.
-            return input.Where(n => n % 2 == 0).Min();
+            // Gerade Zahlen inkludieren 0, 2, 4...
+            var result = _service.GetMinEven(_data);
+            Assert.Equal(0, result);
         }
 
-        // --- f. Die größte ungerade Zahl ---
-
-        /// <summary>
-        /// Filtert ungerade Zahlen und gibt davon die größte zurück.
-        /// </summary>
-        /// <param name="input">Eingabe-Array.</param>
-        /// <returns>Die größte ungerade Zahl.</returns>
-        public int GetMaxOdd(int[] input)
+        [Fact]
+        public void GetMaxOdd_ShouldReturnLargestOddNumber()
         {
-            // 1. Where: Filtert auf ungerade Zahlen (Rest bei Division durch 2 ist nicht 0).
-            // 2. Max: Sucht das Maximum.
-            return input.Where(n => n % 2 != 0).Max();
+            // Ungerade: ..., 11, 13, 19
+            var result = _service.GetMaxOdd(_data);
+            Assert.Equal(19, result);
         }
 
-        // --- g. Die Summe aller geraden Zahlen ---
-
-        /// <summary>
-        /// Addiert nur die geraden Zahlen auf.
-        /// </summary>
-        /// <param name="input">Eingabe-Array.</param>
-        /// <returns>Summe der geraden Zahlen.</returns>
-        public int GetSumEven(int[] input)
+        [Fact]
+        public void GetCountEven_ShouldReturnCorrectAmount()
         {
-            return input.Where(n => n % 2 == 0).Sum();
-        }
-
-        // --- h. Durchschnitt aller ungeraden Zahlen ---
-
-        /// <summary>
-        /// Berechnet den Durchschnitt nur für die ungeraden Zahlen.
-        /// </summary>
-        /// <param name="input">Eingabe-Array.</param>
-        /// <returns>Durchschnitt der ungeraden Zahlen.</returns>
-        public double GetAverageOdd(int[] input)
-        {
-            return input.Where(n => n % 2 != 0).Average();
-        }
-
-        // --- i. Anzahl aller geraden Zahlen ---
-
-        /// <summary>
-        /// Zählt, wie viele gerade Zahlen im Array enthalten sind.
-        /// </summary>
-        /// <param name="input">Eingabe-Array.</param>
-        /// <returns>Anzahl der Treffer.</returns>
-        public int GetCountEven(int[] input)
-        {
-            // Count() kann direkt ein Prädikat (Bedingung) aufnehmen.
-            // Das ist effizienter als Where().Count().
-            return input.Count(n => n % 2 == 0);
+            // Gerade: 4, 8, 6, 2, 0, 22, 12, 16, 18 (9 Stück)
+            var result = _service.GetCountEven(_data);
+            Assert.Equal(9, result);
         }
     }
 }
