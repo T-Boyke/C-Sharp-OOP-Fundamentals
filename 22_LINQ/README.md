@@ -1,6 +1,6 @@
 # 22_LINQ - Grundlagen der Datenabfrage
 
-Dieses Projekt behandelt die Grundlagen von LINQ (Language Integrated Query) in C#. Es vereint Logik für **Filterung**, **Sortierung** und **Partitionierung** von Datenkollektionen und demonstriert den Vergleich zwischen **Extension Method Syntax** und **Query Expression Syntax**.
+Dieses Projekt behandelt die Grundlagen von LINQ (Language Integrated Query) in C#. Es vereint Logik für **Filterung**, **Sortierung** und **Partitionierung** von Datenkollektionen und demonstriert den direkten Vergleich zwischen **Extension Method Syntax** und **Query Expression Syntax**.
 
 ## Projektstruktur
 
@@ -19,16 +19,16 @@ Das Projekt ist modular aufgebaut und trennt die Logik in spezifische Services:
 
 | Variante | Beschreibung | Beispiel |
 | :--- | :--- | :--- |
-| **Extension Method Syntax** | [cite_start]Methodenketten (Fluent API) mit Lambda-Ausdrücken[cite: 22]. | `data.Where(x => x > 5).Take(3)` |
-| **Query Expression Syntax** | [cite_start]Deklarative, SQL-ähnliche Syntax[cite: 22]. | `from x in data where x > 5 select x` |
+| **Extension Method Syntax** | Methodenketten (Fluent API) mit Lambda-Ausdrücken. | `data.Where(x => x > 5).Take(3)` |
+| **Query Expression Syntax** | Deklarative, SQL-ähnliche Syntax. | `from x in data where x > 5 select x` |
 
 ### 2. Genutzte LINQ-Operatoren
 
 * **Filterung (`Where`)**: Selektion von Elementen basierend auf Bedingungen.
-* [cite_start]**Sortierung (`OrderBy`, `ThenBy`, `Reverse`)**: Primäre und sekundäre Ordnung sowie Invertierung[cite: 23, 33].
-* [cite_start]**Partitionierung (`Take`, `Skip`)**: Auswahl von Elementen anhand ihrer Position (Anfang/Ende)[cite: 8, 10].
-* [cite_start]**Bedingte Partitionierung (`TakeWhile`, `SkipWhile`)**: Auswahl, solange eine Bedingung wahr ist[cite: 11, 12].
-* [cite_start]**Chunking (`Chunk`)**: Aufteilen einer Liste in gleich große Blöcke (z. B. für Paging)[cite: 13].
+* **Sortierung (`OrderBy`, `ThenBy`, `Reverse`)**: Primäre und sekundäre Ordnung sowie Invertierung.
+* **Partitionierung (`Take`, `Skip`)**: Auswahl von Elementen anhand ihrer Position (Anfang/Ende).
+* **Bedingte Partitionierung (`TakeWhile`, `SkipWhile`)**: Auswahl, solange eine Bedingung wahr ist.
+* **Chunking (`Chunk`)**: Aufteilen einer Liste in gleich große Blöcke (z. B. für Paging).
 
 ## Aufgabenübersicht
 
@@ -40,29 +40,35 @@ Das Projekt ist modular aufgebaut und trennt die Logik in spezifische Services:
 ### Teil 2: Sortierung (Numbers & Strings)
 *Quelle: Aufgabe LINQ Sortierung*
 
-* [cite_start]**Integer-Operationen** (Datenbasis: `[5, 4, 1, ...]` [cite: 21]):
-    * [cite_start]Aufsteigende [cite: 23] [cite_start]und absteigende Sortierung[cite: 24].
-    * [cite_start]Kombination aus Filterung (gerade Zahlen) und Sortierung[cite: 25].
-    * [cite_start]Wertebereich-Filterung (5-11) mit absteigender Sortierung[cite: 26].
-* [cite_start]**String-Operationen** (Datenbasis: `["zero", "one", ...]` [cite: 28]):
-    * [cite_start]Sortierung nach Wortlänge[cite: 31].
-    * [cite_start]Mehrstufige Sortierung (Länge aufsteigend, Alphabet absteigend)[cite: 32].
-    * [cite_start]Invertierung der Reihenfolge[cite: 33].
-    * [cite_start]Custom-Sortierung nach erstem (asc) und letztem (desc) Buchstaben[cite: 34].
+* **Integer-Operationen** (Datenbasis: `[5, 4, 1, ...]`):
+    * Aufsteigende und absteigende Sortierung.
+    * Kombination aus Filterung (gerade Zahlen) und Sortierung.
+    * Wertebereich-Filterung (5-11) mit absteigender Sortierung.
+* **String-Operationen** (Datenbasis: `["zero", "one", ...]`):
+    * Sortierung nach Wortlänge.
+    * Mehrstufige Sortierung (Länge aufsteigend, Alphabet absteigend).
+    * Invertierung der Reihenfolge.
+    * Custom-Sortierung nach erstem (asc) und letztem (desc) Buchstaben.
 
 ### Teil 3: Partitionierung (Numbers)
 *Quelle: Aufgabe LINQ Partitionierung*
 
-* [cite_start]**Positionsspezifische Abfragen** (Datenbasis: `[5, 4, 1, ...]` [cite: 6]):
-    * [cite_start]Die ersten fünf Elemente (`Take`)[cite: 8].
-    * [cite_start]Die letzten fünf Elemente (`TakeLast`)[cite: 9].
-    * [cite_start]Mittelteil ohne Ränder (Erste und letzte drei ignorieren)[cite: 10].
+* **Positionsspezifische Abfragen** (Datenbasis: `[5, 4, 1, ...]`):
+    * Die ersten fünf Elemente (`Take`).
+    * Die letzten fünf Elemente (`TakeLast`).
+    * Mittelteil ohne Ränder (Erste und letzte drei ignorieren).
 * **Werteabhängige Partitionierung**:
-    * [cite_start]Alle Elemente, die *vor* der 22 stehen (`TakeWhile`)[cite: 11].
-    * [cite_start]Alle Elemente, die *nach* der 12 stehen (`SkipWhile`)[cite: 12].
+    * Alle Elemente, die *vor* der 22 stehen (`TakeWhile`).
+    * Alle Elemente, die *nach* der 12 stehen (`SkipWhile`).
 * **Paging**:
-    * [cite_start]Seitenweise Ausgabe des Arrays (5 Elemente pro Seite) (`Chunk`)[cite: 13].
+    * Seitenweise Ausgabe des Arrays (5 Elemente pro Seite) (`Chunk`).
 
+## Ausführung
+
+Starten der Konsolenanwendung:
+
+```bash
+dotnet run --project LinqConsoleApp
 ## Ausführung
 
 Starten der Konsolenanwendung:
