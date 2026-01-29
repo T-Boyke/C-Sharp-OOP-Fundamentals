@@ -69,19 +69,6 @@ Starten der Konsolenanwendung:
 
 ```bash
 dotnet run --project LinqConsoleApp
-## Ausführung
-
-Starten der Konsolenanwendung:
-
-```bash
-dotnet run --project LinqConsoleApp
-
-## Ausführung
-
-Starten der Konsolenanwendung:
-
-```bash
-dotnet run --project LinqConsoleApp
 ```
 
 ```Bash
