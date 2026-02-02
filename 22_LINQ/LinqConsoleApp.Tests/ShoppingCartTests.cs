@@ -5,51 +5,46 @@ using System.Linq;
 namespace LinqConsoleApp.Tests
 {
     /// <summary>
-    /// Validiert die LINQ-Logik für die Warenkorb-Aufgabe (20260130).
-    /// Fokus auf Korrektheit der Joins und Aggregationen.
+    /// Testet die Geschäftslogik der Warenkorb-Abfragen.
     /// </summary>
     public class ShoppingCartTests
     {
         /// <summary>
-        /// Überprüft, ob die Umsatzberechnung pro Kunde (Aufgabe k) korrekt durchgeführt wird.
+        /// Validiert die korrekte Umsatzberechnung eines Kunden (Aufgabe k).
         /// </summary>
         [Fact]
-        public void CalculateCustomerTurnover_ShouldReturnCorrectValues()
+        public void CalculateCustomerTurnover_Walter_ShouldBe40()
         {
             // Arrange
             var kunden = Kunde.GetKundenListe();
             var produkte = Produkt.GetProduktListe();
 
-            // Act
-            var walterUmsatz = kunden
-                .Where(k => k.Name == "Walter")
-                .Select(k => k.Bestellungen.Sum(b => 
-                    produkte.First(p => p.ProduktNr == b.ProduktNr).Preis * b.Anzahl))
-                .FirstOrDefault();
+            // Act: Walter hat 4x Quark (ProdNr 2, Preis 10€)
+            var walter = kunden.First(k => k.Name == "Walter");
+            var umsatz = walter.Bestellungen.Sum(b => 
+                produkte.First(p => p.ProduktNr == b.ProduktNr).Preis * b.Anzahl);
 
             // Assert
-            // Walter: ProdNr 2 (Quark, 10€) * 4 Stück = 40€
-            Assert.Equal(40m, walterUmsatz);
+            Assert.Equal(40m, umsatz);
         }
 
         /// <summary>
-        /// Überprüft die Filterung von Bestellungen nach Herkunftsland (Aufgabe b).
+        /// Prüft die korrekte Anzahl an Bestellungen aus Deutschland (Aufgabe b).
         /// </summary>
         [Fact]
-        public void FilterGermanOrders_ShouldReturnCorrectCount()
+        public void CountGermanOrders_ShouldBeCorrect()
         {
             // Arrange
             var kunden = Kunde.GetKundenListe();
 
             // Act
-            var germanOrdersCount = kunden
+            var anzahl = kunden
                 .Where(k => k.Land == Länder.Germany)
                 .SelectMany(k => k.Bestellungen)
                 .Count();
 
-            // Assert
-            // Walter (1) + Thomas (2) = 3 Bestellungen
-            Assert.Equal(3, germanOrdersCount);
+            // Assert: Walter (1) + Thomas (2) = 3
+            Assert.Equal(3, anzahl);
         }
     }
 }
