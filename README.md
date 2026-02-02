@@ -93,8 +93,9 @@ Dieses Repository ist chronologisch und thematisch strukturiert. Jede Unit enth�
 | [18](./18_Algorithms) | **Algorithmen** | Sort, Search, Complexity (Big O) | ✅ |
 | [19](./19_Collections) | **Generic Collections** | List, Dictionary, HashSet | ✅ |
 | [20](./20_EventsExceptions) | **Exception Handling** | Try-Catch-Finally, Custom Exceptions | ✅ |
-| [21](./21_ExtensionMethods) | **Extension Methods** | Erweiterung von String, Int und Interfaces | 🚧 |
-| [22](./22_LINQ_Filtering) | **LINQ Filtering** | Datenabfrage mit Method- & Query-Syntax | 🚧 |
+| [21](./21_ExtensionMethods) | **Extension Methods** | Erweiterung von String, Int und Interfaces | ✅ |
+| [22](./22_LINQ) | **LINQ Masterclass** | Joins, Aggregation, Shopping Cart | ✅ |
+| [23](./23_FilesAndStreams) | **Files & Streams** | Byte-Vergleich, I/O, FileSystemWatcher | ✅ |
 ---
 
 ## 🛠 Best Practices & Standards
