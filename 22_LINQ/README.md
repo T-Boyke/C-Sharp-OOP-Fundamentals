@@ -33,8 +33,50 @@ Das Projekt ist modular aufgebaut und trennt die Logik in spezifische Services:
 
 ## Aufgabenübersicht
 
-... (Teil 1-4 wie bisher) ...
+### Teil 1: Filterung (Fahrzeuge)
+*Quelle: Aufgabe LINQ Filterung*
 
+* Filterung von Listen komplexer Objekte (Fahrzeuge) anhand von Eigenschaften wie Hersteller, Baujahr oder Farbe.
+
+### Teil 2: Sortierung (Numbers & Strings)
+*Quelle: Aufgabe LINQ Sortierung*
+
+* **Integer-Operationen**:
+    * Aufsteigende und absteigende Sortierung.
+    * Kombination aus Filterung (gerade Zahlen) und Sortierung.
+    * Wertebereich-Filterung (5-11) mit absteigender Sortierung.
+* **String-Operationen**:
+    * Sortierung nach Wortlänge.
+    * Mehrstufige Sortierung (Länge aufsteigend, Alphabet absteigend).
+    * Invertierung der Reihenfolge.
+    * Custom-Sortierung nach erstem (asc) und letztem (desc) Buchstaben.
+
+### Teil 3: Partitionierung (Numbers)
+*Quelle: Aufgabe LINQ Partitionierung*
+
+* **Positionsspezifische Abfragen**:
+    * Die ersten fünf Elemente (`Take`).
+    * Die letzten fünf Elemente (`TakeLast`).
+    * Mittelteil ohne Ränder (Erste und letzte drei ignorieren).
+* **Werteabhängige Partitionierung**:
+    * Alle Elemente, die *vor* der 22 stehen (`TakeWhile`).
+    * Alle Elemente, die *nach* der 12 stehen (`SkipWhile`).
+* **Paging**:
+    * Seitenweise Ausgabe des Arrays (5 Elemente pro Seite) (`Chunk`).
+
+### Teil 4: Aggregation (Numbers)
+*Quelle: Aufgabe LINQ Aggregation*
+
+* **Statistische Kennzahlen**:
+    * Summe aller Werte (`Sum`).
+    * Kleinste (`Min`) und größte (`Max`) Zahl.
+    * Durchschnittswert (`Average`).
+* **Bedingte Aggregation**:
+    * Kleinste gerade Zahl.
+    * Größte ungerade Zahl.
+    * Summe und Durchschnitt spezifischer Teilmengen (z. B. nur gerade Zahlen).
+    * Zählen von Elementen mit Bedingung (`Count` mit Prädikat).
+    
 ### Teil 5: Komplexe Datenbeziehungen (Warenkorb)
 *Quelle: Aufgabe LINQ Warenkorb (30. Januar 2026)*
 
@@ -48,4 +90,3 @@ Das Projekt ist modular aufgebaut und trennt die Logik in spezifische Services:
 dotnet run --project LinqConsoleApp
 dotnet test
 ```
----
