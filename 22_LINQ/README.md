@@ -1,17 +1,18 @@
 # 22_LINQ - Grundlagen der Datenabfrage
 
-Dieses Projekt behandelt die Grundlagen von LINQ (Language Integrated Query) in C#. Es vereint Logik für **Filterung**, **Sortierung**, **Partitionierung** und **Aggregation** von Datenkollektionen. Dabei wird der direkte Vergleich zwischen **Extension Method Syntax** und **Query Expression Syntax** demonstriert.
+Dieses Projekt behandelt die Grundlagen von LINQ (Language Integrated Query) in C#. Es vereint Logik für **Filterung**, **Sortierung**, **Partitionierung**, **Aggregation** und **komplexe Datenbeziehungen**. Dabei wird der direkte Vergleich zwischen **Extension Method Syntax** und **Query Expression Syntax** demonstriert.
 
 ## Projektstruktur
 
 Das Projekt ist modular aufgebaut und trennt die Logik in spezifische Services:
 
 * **LinqConsoleApp**: Die Hauptanwendung.
-    * `Services/FilteringService.cs`: Logik zur Filterung komplexer Objekte (z. B. Fahrzeuge).
+    * `Services/FilteringService.cs`: Logik zur Filterung komplexer Objekte.
     * `Services/IntSortingService.cs`: Sortieralgorithmen für Integer-Arrays.
     * `Services/StringSortingService.cs`: Komplexe Sortierungen für String-Arrays.
     * `Services/PartitioningService.cs`: Aufteilung und Segmentierung von Datenströmen.
-    * `Services/AggregationService.cs`: Berechnung statistischer Kennzahlen (Summe, Min, Max etc.).
+    * `Services/AggregationService.cs`: Berechnung statistischer Kennzahlen.
+    * `Services/ShoppingCartService.cs`: **(Neu)** Joins, Gruppierungen und komplexe Aggregationen (Warenkorb).
 * **LinqConsoleApp.Tests**: xUnit-Tests zur Validierung aller Service-Methoden (TDD-Ansatz).
 
 ## Behandelte Konzepte
@@ -25,65 +26,26 @@ Das Projekt ist modular aufgebaut und trennt die Logik in spezifische Services:
 
 ### 2. Genutzte LINQ-Operatoren
 
-* **Filterung (`Where`)**: Selektion von Elementen basierend auf Bedingungen.
-* **Sortierung (`OrderBy`, `ThenBy`, `Reverse`)**: Primäre und sekundäre Ordnung sowie Invertierung.
-* **Partitionierung (`Take`, `Skip`, `Chunk`)**: Auswahl von Elementen anhand ihrer Position oder Paging.
-* **Aggregation (`Sum`, `Min`, `Max`, `Average`, `Count`)**: Berechnung einzelner Werte aus einer Sequenz.
+* **Filterung & Sortierung**: `Where`, `OrderBy`, `ThenBy`, `OrderByDescending`.
+* **Partitionierung**: `Take`, `Skip`, `Chunk`.
+* **Aggregation**: `Sum`, `Min`, `Max`, `Average`, `Count`.
+* **Relationen (Neu)**: `Join`, `SelectMany`, `GroupBy`.
 
 ## Aufgabenübersicht
 
-### Teil 1: Filterung (Fahrzeuge)
-*Quelle: Aufgabe LINQ Filterung*
+... (Teil 1-4 wie bisher) ...
 
-* Filterung von Listen komplexer Objekte (Fahrzeuge) anhand von Eigenschaften wie Hersteller, Baujahr oder Farbe.
+### Teil 5: Komplexe Datenbeziehungen (Warenkorb)
+*Quelle: Aufgabe LINQ Warenkorb (30. Januar 2026)*
 
-### Teil 2: Sortierung (Numbers & Strings)
-*Quelle: Aufgabe LINQ Sortierung*
-
-* **Integer-Operationen**:
-    * Aufsteigende und absteigende Sortierung.
-    * Kombination aus Filterung (gerade Zahlen) und Sortierung.
-    * Wertebereich-Filterung (5-11) mit absteigender Sortierung.
-* **String-Operationen**:
-    * Sortierung nach Wortlänge.
-    * Mehrstufige Sortierung (Länge aufsteigend, Alphabet absteigend).
-    * Invertierung der Reihenfolge.
-    * Custom-Sortierung nach erstem (asc) und letztem (desc) Buchstaben.
-
-### Teil 3: Partitionierung (Numbers)
-*Quelle: Aufgabe LINQ Partitionierung*
-
-* **Positionsspezifische Abfragen**:
-    * Die ersten fünf Elemente (`Take`).
-    * Die letzten fünf Elemente (`TakeLast`).
-    * Mittelteil ohne Ränder (Erste und letzte drei ignorieren).
-* **Werteabhängige Partitionierung**:
-    * Alle Elemente, die *vor* der 22 stehen (`TakeWhile`).
-    * Alle Elemente, die *nach* der 12 stehen (`SkipWhile`).
-* **Paging**:
-    * Seitenweise Ausgabe des Arrays (5 Elemente pro Seite) (`Chunk`).
-
-### Teil 4: Aggregation (Numbers)
-*Quelle: Aufgabe LINQ Aggregation*
-
-* **Statistische Kennzahlen**:
-    * Summe aller Werte (`Sum`).
-    * Kleinste (`Min`) und größte (`Max`) Zahl.
-    * Durchschnittswert (`Average`).
-* **Bedingte Aggregation**:
-    * Kleinste gerade Zahl.
-    * Größte ungerade Zahl.
-    * Summe und Durchschnitt spezifischer Teilmengen (z. B. nur gerade Zahlen).
-    * Zählen von Elementen mit Bedingung (`Count` mit Prädikat).
+* **Joins**: Verknüpfung von Bestellungen und Produkten via ProduktNr.
+* **Gruppierung**: Kunden nach Land und Produkte nach Anfangsbuchstaben.
+* **Verschachtelte Aggregation**: Berechnung des Gesamtumsatzes pro Kunde.
 
 ## Ausführung
 
-Starten der Konsolenanwendung zur Demonstration aller Features:
-
 ```bash
 dotnet run --project LinqConsoleApp
-```
-
-```Bash
 dotnet test
 ```
+---
