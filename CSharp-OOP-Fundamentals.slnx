@@ -43,5 +43,7 @@
   <Project Path="22_LINQ/LinqConsoleApp.Tests/LinqConsoleApp.Tests.csproj" Type="Classic C#" />
   <Project Path="23_FilesAndStreams/FileConsoleApp/FileConsoleApp.csproj" Type="Classic C#" />
   <Project Path="23_FilesAndStreams/FileConsoleApp.Tests/FileConsoleApp.Tests.csproj" Type="Classic C#" />
+  <Project Path="24_Serialization/SerializationConsoleApp/SerializationConsoleApp.csproj" Type="Classic C#" />
+  <Project Path="24_Serialization/SerializationConsoleApp.Tests/SerializationConsoleApp.Tests.csproj" Type="Classic C#" />
   <Project Path="Controller/Controller.csproj" Type="Classic C#" />
 </Solution>
