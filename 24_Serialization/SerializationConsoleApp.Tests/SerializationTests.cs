@@ -1,4 +1,5 @@
 using System.IO;
+using System.Threading.Tasks;
 using Xunit;
 using SerializationConsoleApp.Models;
 using SerializationConsoleApp.Services;
@@ -6,15 +7,20 @@ using SerializationConsoleApp.Services;
 namespace SerializationConsoleApp.Tests
 {
     /// <summary>
-    /// Testklasse zur Validierung der Serialisierungslogik gemäß Aufgabenstellung.
-    /// Prüft das korrekte Speichern (Persistenz) und Laden (Deserialisierung) von Person-Objekten.
+    /// Testklasse zur Validierung der asynchronen Serialisierungslogik.
+    /// Prüft Persistenz, Datenintegrität und Fehlerbehandlung gemäß den Anforderungen.
     /// </summary>
     public class SerializationTests
     {
         private readonly SerializationService _service;
+        
+        /// <summary>
+        /// Konstante für den Namen des Datenverzeichnisses zur Vermeidung von "Magic Strings".
+        /// </summary>
+        private const string DATA_DIR = "Data";
 
         /// <summary>
-        /// Initialisiert die Testumgebung.
+        /// Initialisiert die Testumgebung und den benötigten Service.
         /// </summary>
         public SerializationTests()
         {
@@ -22,26 +28,28 @@ namespace SerializationConsoleApp.Tests
         }
 
         /// <summary>
-        /// Testet, ob die Methode SavePerson eine Datei mit dem korrekten Namen erstellt.
+        /// Verifiziert, dass die Methode <see cref="SerializationService.SavePersonAsync"/> 
+        /// eine JSON-Datei im korrekten Verzeichnis erstellt.
         /// </summary>
+        /// <returns>Ein Task, der den asynchronen Testvorgang repräsentiert.</returns>
         [Fact]
-        public void SavePerson_ShouldCreateFile()
+        public async Task SavePersonAsync_ShouldCreateFile_In_DataDirectory()
         {
-            // Arrange
-            var person = new Person { Vorname = "Max", Nachname = "Mustermann", Alter = 30 };
-            string expectedFileName = "Mustermann.txt";
+            // Arrange: Vorbereitung der Testdaten und Pfade
+            var person = new Person { Vorname = "Max", Nachname = "TestMustermann", Alter = 30 };
+            string expectedFileName = Path.Combine(DATA_DIR, "TestMustermann.json");
 
             try
             {
-                // Act
-                _service.SavePerson(person);
+                // Act: Ausführen der zu testenden Methode
+                await _service.SavePersonAsync(person);
 
-                // Assert
-                Assert.True(File.Exists(expectedFileName), "Die Datei wurde nicht erstellt.");
+                // Assert: Prüfung, ob die Datei physisch existiert
+                Assert.True(File.Exists(expectedFileName), $"Die Datei wurde nicht im Pfad '{expectedFileName}' erstellt.");
             }
             finally
             {
-                // Cleanup: Erstellte Datei nach dem Test löschen
+                // Teardown: Bereinigung der Test-Artefakte
                 if (File.Exists(expectedFileName))
                 {
                     File.Delete(expectedFileName);
@@ -50,22 +58,25 @@ namespace SerializationConsoleApp.Tests
         }
 
         /// <summary>
-        /// Testet den Round-Trip (Speichern -> Laden), um sicherzustellen, dass die Daten unverändert bleiben.
+        /// Verifiziert den Round-Trip (Speichern und Laden), um sicherzustellen, dass keine Datenverluste auftreten.
         /// </summary>
+        /// <returns>Ein Task, der den asynchronen Testvorgang repräsentiert.</returns>
         [Fact]
-        public void LoadPerson_ShouldReturnCorrectData()
+        public async Task LoadPersonAsync_ShouldReturnCorrectData_AfterRoundTrip()
         {
-            // Arrange
-            var originalPerson = new Person { Vorname = "Erika", Nachname = "Musterfrau", Alter = 42 };
-            string fileName = "Musterfrau.txt";
-            _service.SavePerson(originalPerson);
+            // Arrange: Erstellung eines Referenzobjekts
+            var originalPerson = new Person { Vorname = "Erika", Nachname = "TestMusterfrau", Alter = 42 };
+            string fileName = Path.Combine(DATA_DIR, "TestMusterfrau.json");
+            
+            // Vorbedingung schaffen: Datei muss existieren
+            await _service.SavePersonAsync(originalPerson);
 
             try
             {
-                // Act
-                Person? loadedPerson = _service.LoadPerson("Musterfrau");
+                // Act: Laden der Daten
+                Person? loadedPerson = await _service.LoadPersonAsync("TestMusterfrau");
 
-                // Assert
+                // Assert: Prüfung auf Gleichheit der Eigenschaften
                 Assert.NotNull(loadedPerson);
                 Assert.Equal(originalPerson.Vorname, loadedPerson.Vorname);
                 Assert.Equal(originalPerson.Nachname, loadedPerson.Nachname);
@@ -73,7 +84,7 @@ namespace SerializationConsoleApp.Tests
             }
             finally
             {
-                // Cleanup
+                // Teardown: Bereinigung
                 if (File.Exists(fileName))
                 {
                     File.Delete(fileName);
@@ -82,24 +93,27 @@ namespace SerializationConsoleApp.Tests
         }
 
         /// <summary>
-        /// Testet das Verhalten beim Versuch, eine nicht existierende Person zu laden.
+        /// Verifiziert, dass beim Laden einer nicht existierenden Person <c>null</c> zurückgegeben wird
+        /// und keine Exception geworfen wird.
         /// </summary>
+        /// <returns>Ein Task, der den asynchronen Testvorgang repräsentiert.</returns>
         [Fact]
-        public void LoadPerson_FileNotFound_ShouldReturnNull()
+        public async Task LoadPersonAsync_FileNotFound_ShouldReturnNull()
         {
-            // Arrange
-            string nonExistentName = "Niemand";
+            // Arrange: Definition eines Namens, der sicher nicht existiert
+            string nonExistentName = "NiemandVorhanden";
+            string filePath = Path.Combine(DATA_DIR, $"{nonExistentName}.json");
 
-            // Sicherstellen, dass die Datei wirklich nicht existiert
-            if (File.Exists($"{nonExistentName}.txt"))
+            // Sicherheitscheck: Falls Datei durch vorherige Runs existiert, löschen
+            if (File.Exists(filePath))
             {
-                File.Delete($"{nonExistentName}.txt");
+                File.Delete(filePath);
             }
 
-            // Act
-            Person? result = _service.LoadPerson(nonExistentName);
+            // Act: Versuch, nicht existierende Daten zu laden
+            Person? result = await _service.LoadPersonAsync(nonExistentName);
 
-            // Assert
+            // Assert: Erwartetes Ergebnis ist null
             Assert.Null(result);
         }
     }
