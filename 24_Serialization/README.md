@@ -1,54 +1,63 @@
 # 24_Serialization - Datenpersistenz mit JSON
 
-Dieses Projekt behandelt die Serialisierung und Deserialisierung von Objekten in C#. Es demonstriert, wie Laufzeit-Objekte in ein speicherbares Format (JSON) umgewandelt und wiederhergestellt werden, basierend auf der Aufgabe vom 3. Februar 2026.
+Dieses Projekt behandelt die asynchrone Serialisierung und Deserialisierung von Objekten in C#. [cite_start]Es setzt die Anforderungen der "Aufgabe Serialisierung" vom 3. Februar 2026 um und demonstriert moderne Best Practices für Datei-I/O[cite: 2, 7].
+
+## Aufgabenstellung
+
+Die Umsetzung basiert auf den spezifischen Anforderungen der "Aufgabe Serialisierung":
+
+1.  [cite_start]**Menüsystem**: Implementierung eines Programms mit den Optionen "Laden" und "Speichern"[cite: 4, 5, 6].
+2.  [cite_start]**Datenmodell**: Erstellung einer Klasse `Person` mit den Eigenschaften Vorname, Nachname und Alter[cite: 8].
+3.  **Speichern (Input & Serialisierung)**:
+    * [cite_start]Erfassung der Werte über die Konsoleneingabe[cite: 9].
+    * [cite_start]Erzeugung eines Objekts aus den Eingaben[cite: 8].
+    * [cite_start]Serialisierung des Objekts in eine Datei mit dem Namensschema `<Name>.txt`[cite: 10].
+4.  **Laden (Deserialisierung & Output)**:
+    * [cite_start]Abfrage des Namens der Person[cite: 11].
+    * [cite_start]Deserialisierung der entsprechenden Datei in ein Objekt[cite: 11].
+    * [cite_start]Ausgabe der Werte auf der Konsole[cite: 11].
+5.  [cite_start]**Technologie**: Freie Wahl des Serialisierers[cite: 12].
+
+> **Hinweis zur Umsetzung**: In diesem Projekt wurde abweichend von der Vorgabe (`.txt`) das Dateiformat `.json` gewählt, um die Syntax-Kompatibilität mit modernen Editoren zu gewährleisten. Als Serialisierer kommt `System.Text.Json` zum Einsatz.
 
 ## Projektstruktur
 
-* **SerializationConsoleApp**: Die Hauptanwendung.
-    * `Models/Person.cs`: Datenklasse mit Eigenschaften für Vorname, Nachname und Alter.
-    * `Services/SerializationService.cs`: Kapselt die Logik für `System.Text.Json`.
-    * `Program.cs`: Konsolenbasiertes Menüsystem für Benutzerinteraktion.
-* **SerializationConsoleApp.Tests**: xUnit-Tests zur Validierung der Persistenz.
+| Datei | Beschreibung |
+| :--- | :--- |
+| **SerializationConsoleApp** | Hauptanwendung |
+| `Models/Person.cs` | POCO-Datenklasse mit Eigenschaften für Vorname, Nachname und Alter |
+| `Services/SerializationService.cs` | Kapselt die Logik für `System.Text.Json` und Dateioperationen |
+| `Program.cs` | Einstiegspunkt mit Menüsystem (Laden/Speichern) |
+| **SerializationConsoleApp.Tests** | xUnit-Tests zur Validierung der Persistenz |
 
 ## Behandelte Konzepte
 
 ### 1. JSON Serialisierung
-Verwendung des modernen `System.Text.Json` Namespaces (seit .NET Core 3.0 Standard) anstelle von `Newtonsoft.Json`.
-* **Serialize**: Umwandlung eines Objekts in einen JSON-String.
-* **Deserialize**: Rekonstruktion eines Objekts aus einem JSON-String.
-* **Optionen**: Verwendung von `WriteIndented = true` für gut lesbare Textdateien.
+Verwendung des performanten `System.Text.Json` Namespace (Best Practice).
 
-### 2. Datei-I/O
-* Speicherung der Daten in Textdateien mit dem Namensschema `<Nachname>.txt`.
-* Überprüfung auf Dateiexistenz vor dem Laden (`File.Exists`).
+* **SerializeAsync**: Speichereffiziente Umwandlung eines Objekts direkt in einen Dateistream.
+* **DeserializeAsync**: Asynchrone Rekonstruktion eines Objekts aus einem Dateistream.
+* **JsonSerializerOptions**: Konfiguration `WriteIndented = true` für formatierten Output.
 
-## Aufgabenübersicht
-
-### Teil 1: Das Datenmodell
-Erstellung einer Klasse `Person` mit den Eigenschaften:
-* `Vorname` (string)
-* `Nachname` (string)
-* `Alter` (int)
-
-### Teil 2: Das Menüsystem
-Implementierung einer Konsolenanwendung mit folgenden Optionen:
-1.  **Speichern**: Abfrage der Personendaten und Serialisierung in eine Datei.
-2.  **Laden**: Abfrage des Nachnamens, Suche der Datei und Anzeige der Daten.
+### 2. Asynchrone Datei-I/O
+* Nutzung von `async` und `await` zur Vermeidung blockierender Threads.
+* Verwendung von `FileStream` für performanten Datenzugriff.
+* Sichere Pfadgenerierung zur Verhinderung von Path-Traversal-Angriffen.
 
 ## Ausführung
 
-Starten der Anwendung:
+Starten der Anwendung über die CLI:
 ```bash
 dotnet run --project SerializationConsoleApp
+Ausführen der Unit-Tests:
 ```
-
-Ausführen der Tests:
 
 ```Bash
 dotnet test
+Beispielhafter Inhalt einer generierten Datei
+Pfad: Data/Mustermann.json
 ```
 
-Beispiel-Output
 ```JSON
 {
   "Vorname": "Max",
