@@ -97,6 +97,7 @@ Dieses Repository ist chronologisch und thematisch strukturiert. Jede Unit enth�
 | [22](./22_LINQ) | **LINQ Masterclass** | Joins, Aggregation, Shopping Cart | ✅ |
 | [23](./23_FilesAndStreams) | **Files & Streams** | Byte-Vergleich, I/O, FileSystemWatcher | ✅ |
 | [24](./24_Serialization) | **Serialisierung** | JSON, System.Text.Json, Persistenz | ✅ |
+| [25](./25_Klausur2) | xxx | xxx | ✅ |
 ---
 
 ## 🛠 Best Practices & Standards
